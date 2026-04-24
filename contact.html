@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Muzz Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(15, 25, 45, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d2ff, #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #a0b3d9;
+            font-weight: 500;
+            padding: 8px 20px;
+            border-radius: 40px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            color: white;
+        }
+
+        .btn-logout {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .main-container {
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h2 {
+            color: white;
+            font-size: 2rem;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-info h4 {
+            margin-bottom: 0.2rem;
+            color: #1a1a2e;
+        }
+
+        .contact-info p {
+            color: #4a4a6a;
+        }
+
+        .wa-button {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .wa-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .cs-note {
+            text-align: center;
+            margin-top: 1rem;
+            color: #4a4a6a;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><i class="fas fa-bolt"></i> Muzz Shop</div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="products.html" class="nav-link">Products</a>
+            <a href="contact.html" class="nav-link active">Contact</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-header">
+            <h2><i class="fas fa-address-card"></i> Contact Owner</h2>
+            <p>Hubungi kami jika ada pertanyaan</p>
+        </div>
+
+        <div class="contact-card">
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <div class="contact-info">
+                    <h4>Email</h4>
+                    <p>muhammadmuzakir808@gmail.com</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                <div class="contact-info">
+                    <h4>WhatsApp Owner</h4>
+                    <p>+60 175632450 (Malaysia)</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+                <div class="contact-info">
+                    <h4>Instagram</h4>
+                    <p>@muzzshop_official</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="contact-info">
+                    <h4>Location</h4>
+                    <p>Malaysia</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="wa-button" onclick="contactCS()">
+            <i class="fab fa-whatsapp"></i> Contact Customer Service
+        </button>
+        <p class="cs-note">CS WhatsApp: +60 175632450</p>
+    </div>
+
+    <script>
+        function checkAuth() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) window.location.href = 'login.html';
+            return currentUser;
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+
+        function contactCS() {
+            const csNumber = '60175632450';
+            const message = 'Hello CS, I need help with my order at Muzz Shop';
+            window.open(`https://wa.me/${csNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        checkAuth();
+    </script>
+</body>
+</html>

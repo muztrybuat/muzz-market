@@ -1,0 +1,23 @@
+{
+  "name": "muzz-shop",
+  "version": "1.0.0",
+  "description": "Muzz Shop - Auto Order System with QRIS & DuitNow Payment",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo \"Build completed\"",
+    "start": "vercel dev"
+  },
+  "keywords": [
+    "qris",
+    "duitnow",
+    "autorder",
+    "ecommerce",
+    "whatsapp"
+  ],
+  "author": "Muhammad Muzakir",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  }
+}
