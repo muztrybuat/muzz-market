@@ -19,20 +19,50 @@
             min-height: 100vh;
         }
 
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .bg-animation div {
+            position: absolute;
+            display: block;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+            25% { transform: translateY(-100px) translateX(50px); opacity: 0.6; }
+            50% { transform: translateY(50px) translateX(-50px); opacity: 0.4; }
+            75% { transform: translateY(-50px) translateX(100px); opacity: 0.5; }
+        }
+
+        /* Navbar */
         .navbar {
-            background: rgba(15, 25, 45, 0.95);
-            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
@@ -44,6 +74,11 @@
             color: transparent;
         }
 
+        .logo i {
+            background: none;
+            color: #00d2ff;
+        }
+
         .nav-links {
             display: flex;
             gap: 20px;
@@ -52,7 +87,7 @@
 
         .nav-link {
             text-decoration: none;
-            color: #a0b3d9;
+            color: #4a5568;
             font-weight: 500;
             transition: all 0.3s;
         }
@@ -61,13 +96,16 @@
             color: #00d2ff;
         }
 
+        /* Hero Section */
         .hero {
-            min-height: 90vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 80px 20px 50px;
+            padding: 100px 20px 50px;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-card {
@@ -76,11 +114,11 @@
             backdrop-filter: blur(10px);
             border-radius: 48px;
             padding: 3rem 2.5rem;
-            animation: fadeInUp 0.8s ease;
+            animation: slideUp 0.8s ease;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
 
-        @keyframes fadeInUp {
+        @keyframes slideUp {
             from {
                 opacity: 0;
                 transform: translateY(50px);
@@ -92,24 +130,24 @@
         }
 
         .hero-logo {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
             background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .hero-title {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            color: #1a1a2e;
+            color: #2d3748;
             margin-bottom: 1rem;
         }
 
         .hero-desc {
-            color: #4a4a6a;
+            color: #718096;
             margin-bottom: 2rem;
             line-height: 1.6;
         }
@@ -165,7 +203,7 @@
             gap: 2rem;
             flex-wrap: wrap;
             padding-top: 1rem;
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid #e2e8f0;
         }
 
         .feature {
@@ -187,8 +225,18 @@
 
         .feature-text {
             font-size: 0.85rem;
-            color: #1a1a2e;
+            color: #4a5568;
             font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            position: relative;
+            z-index: 1;
         }
 
         @media (max-width: 768px) {
@@ -200,12 +248,26 @@
                 padding: 2rem 1.5rem;
             }
             .hero-title {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
+            }
+            .hero-logo {
+                font-size: 2rem;
+            }
+            .btn-group {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
+    <div class="bg-animation">
+        <div style="top: 10%; left: 10%; width: 100px; height: 100px; animation-delay: 0s;"></div>
+        <div style="top: 70%; left: 80%; width: 150px; height: 150px; animation-delay: 2s;"></div>
+        <div style="top: 40%; left: 85%; width: 60px; height: 60px; animation-delay: 4s;"></div>
+        <div style="top: 80%; left: 20%; width: 80px; height: 80px; animation-delay: 1s;"></div>
+        <div style="top: 20%; left: 60%; width: 50px; height: 50px; animation-delay: 3s;"></div>
+    </div>
+
     <nav class="navbar">
         <div class="logo"><i class="fas fa-bolt"></i> Muzz Shop</div>
         <div class="nav-links">
@@ -221,7 +283,7 @@
                 <i class="fas fa-shopping-cart"></i> Muzz Shop
             </div>
             <h1 class="hero-title">Auto Order System</h1>
-            <p class="hero-desc">Solusi terbaik untuk pembelian produk digital dengan pembayaran QRIS Indonesia & DuitNow Malaysia. Cepat, Aman, dan Terpercaya.</p>
+            <p class="hero-desc">Solusi terbaik untuk pembelian produk digital dengan pembayaran QRIS Indonesia & TNG Malaysia. Cepat, Aman, dan Terpercaya.</p>
             
             <div class="btn-group">
                 <a href="login.html" class="btn-primary">
@@ -239,7 +301,7 @@
                 </div>
                 <div class="feature">
                     <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <div class="feature-text">DuitNow Malaysia</div>
+                    <div class="feature-text">TNG Malaysia</div>
                 </div>
                 <div class="feature">
                     <div class="feature-icon"><i class="fab fa-whatsapp"></i></div>
@@ -247,6 +309,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Muzz Shop. All rights reserved.</p>
     </div>
 </body>
 </html>
