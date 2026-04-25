@@ -29,7 +29,7 @@
         }
 
         .login-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 32px;
             padding: 2.5rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -37,14 +37,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .logo {
@@ -55,7 +49,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         h2 {
@@ -100,6 +94,7 @@
             border-radius: 16px;
             font-size: 1rem;
             transition: 0.3s;
+            background: #f8fafc;
         }
 
         .input-group input:focus {
@@ -149,6 +144,16 @@
             display: none;
         }
 
+        .success-msg {
+            background: #dcfce7;
+            color: #16a34a;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: none;
+        }
+
         .back-home {
             text-align: center;
             margin-top: 1rem;
@@ -163,6 +168,67 @@
         .back-home a:hover {
             color: #00d2ff;
         }
+
+        /* Forgot Password Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 32px;
+            padding: 2rem;
+            max-width: 450px;
+            width: 90%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .modal-header h3 {
+            color: #1a1a2e;
+            font-size: 1.3rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #a0aec0;
+        }
+
+        .close-modal:hover {
+            color: #dc2626;
+        }
+
+        .forgot-step {
+            display: block;
+        }
+
+        .forgot-step.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -175,6 +241,7 @@
             <p class="subtitle">Login to your account</p>
 
             <div id="errorMsg" class="error-msg"></div>
+            <div id="successMsg" class="success-msg"></div>
 
             <div class="form-group">
                 <label>Email Address</label>
@@ -195,6 +262,9 @@
             <button class="btn" onclick="login()">Login</button>
 
             <div class="auth-link">
+                <a href="#" onclick="openForgotModal()">Forgot Password?</a>
+            </div>
+            <div class="auth-link">
                 Don't have account? <a href="register.html">Register</a>
             </div>
             <div class="back-home">
@@ -203,27 +273,195 @@
         </div>
     </div>
 
+    <!-- Modal Forgot Password -->
+    <div id="forgotModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-key"></i> Forgot Password</h3>
+                <button class="close-modal" onclick="closeForgotModal()">&times;</button>
+            </div>
+
+            <!-- Step 1: Verifikasi Email -->
+            <div id="step1" class="forgot-step">
+                <p style="color: #4a4a6a; margin-bottom: 1.5rem;">Masukkan email Anda untuk verifikasi.</p>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="resetEmail" placeholder="your@email.com">
+                    </div>
+                </div>
+                <button class="btn" onclick="verifyEmail()">Verifikasi Email</button>
+            </div>
+
+            <!-- Step 2: Reset Password -->
+            <div id="step2" class="forgot-step" style="display: none;">
+                <p style="color: #4a4a6a; margin-bottom: 1rem;">Masukkan password baru Anda.</p>
+                <div class="form-group">
+                    <label>New Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="newPassword" placeholder="New password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Confirm New Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-check-circle"></i>
+                        <input type="password" id="confirmNewPassword" placeholder="Confirm new password">
+                    </div>
+                </div>
+                <button class="btn" onclick="resetPassword()">Reset Password</button>
+                <div class="auth-link" style="margin-top: 1rem;">
+                    <a href="#" onclick="backToStep1()">← Back</a>
+                </div>
+            </div>
+
+            <div id="forgotErrorMsg" class="error-msg" style="margin-top: 1rem;"></div>
+            <div id="forgotSuccessMsg" class="success-msg" style="margin-top: 1rem;"></div>
+        </div>
+    </div>
+
     <script>
+        // ==================== LOGIN ====================
         function login() {
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             const errorDiv = document.getElementById('errorMsg');
-
+            const successDiv = document.getElementById('successMsg');
+            
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
             if (!email || !password) {
                 errorDiv.style.display = 'block';
                 errorDiv.innerHTML = 'Email and password are required!';
                 return;
             }
-
+            
             const users = JSON.parse(localStorage.getItem('users') || '[]');
             const user = users.find(u => u.email === email && u.password === password);
-
+            
             if (user) {
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 window.location.href = 'dashboard.html';
             } else {
                 errorDiv.style.display = 'block';
                 errorDiv.innerHTML = 'Invalid email or password!';
+            }
+        }
+
+        // ==================== FORGOT PASSWORD ====================
+        let resetEmailTemp = '';
+
+        function openForgotModal() {
+            document.getElementById('forgotModal').classList.add('active');
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('resetEmail').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmNewPassword').value = '';
+            document.getElementById('forgotErrorMsg').style.display = 'none';
+            document.getElementById('forgotSuccessMsg').style.display = 'none';
+        }
+
+        function closeForgotModal() {
+            document.getElementById('forgotModal').classList.remove('active');
+        }
+
+        function verifyEmail() {
+            const email = document.getElementById('resetEmail').value;
+            const errorDiv = document.getElementById('forgotErrorMsg');
+            const successDiv = document.getElementById('forgotSuccessMsg');
+            
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            if (!email) {
+                errorDiv.style.display = 'block';
+                errorDiv.innerHTML = 'Please enter your email address!';
+                return;
+            }
+            
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.email === email);
+            
+            if (!user) {
+                errorDiv.style.display = 'block';
+                errorDiv.innerHTML = 'Email not found! Please register first.';
+                return;
+            }
+            
+            resetEmailTemp = email;
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+            successDiv.style.display = 'block';
+            successDiv.innerHTML = 'Email verified! Please enter your new password.';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 2000);
+        }
+
+        function resetPassword() {
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmNewPassword').value;
+            const errorDiv = document.getElementById('forgotErrorMsg');
+            const successDiv = document.getElementById('forgotSuccessMsg');
+            
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            if (!newPassword || !confirmPassword) {
+                errorDiv.style.display = 'block';
+                errorDiv.innerHTML = 'Please fill in both password fields!';
+                return;
+            }
+            
+            if (newPassword.length < 4) {
+                errorDiv.style.display = 'block';
+                errorDiv.innerHTML = 'Password must be at least 4 characters!';
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                errorDiv.style.display = 'block';
+                errorDiv.innerHTML = 'Passwords do not match!';
+                return;
+            }
+            
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userIndex = users.findIndex(u => u.email === resetEmailTemp);
+            
+            if (userIndex !== -1) {
+                users[userIndex].password = newPassword;
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                successDiv.style.display = 'block';
+                successDiv.innerHTML = 'Password reset successfully! Please login with your new password.';
+                
+                setTimeout(() => {
+                    closeForgotModal();
+                    document.getElementById('loginPassword').value = '';
+                }, 2000);
+            } else {
+                errorDiv.style.display = 'block';
+                errorDiv.innerHTML = 'User not found!';
+            }
+        }
+
+        function backToStep1() {
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('resetEmail').value = '';
+            document.getElementById('forgotErrorMsg').style.display = 'none';
+            document.getElementById('forgotSuccessMsg').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('forgotModal');
+            if (event.target === modal) {
+                closeForgotModal();
             }
         }
     </script>
