@@ -19,7 +19,7 @@
         .page-header{text-align:center;margin-bottom:2rem;}
         .page-header h2{color:white;font-size:2rem;}
         .page-header p{color:rgba(255,255,255,0.8);}
-        .category-filter{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:2rem;position:sticky;top:70px;background:rgba(15,25,45,0.9);backdrop-filter:blur(10px);padding:10px 0;z-index:99;border-radius:50px;}
+        .category-filter{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:2rem;}
         .filter-btn{padding:10px 24px;background:white;border:none;border-radius:40px;cursor:pointer;font-weight:600;transition:0.3s;color:#1a1a2e;}
         .filter-btn:hover,.filter-btn.active{background:linear-gradient(135deg,#00d2ff,#3a7bd5);color:white;}
         .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.8rem;}
@@ -50,8 +50,7 @@
         .total-price span{color:#00d2ff;font-size:1.2rem;}
         .note{background:#fef3c7;padding:0.6rem;border-radius:12px;margin-top:1rem;text-align:center;font-size:0.75rem;color:#92400e;}
         input,select{width:100%;padding:0.7rem;border:1px solid #ddd;border-radius:12px;margin-bottom:1rem;font-size:0.9rem;}
-        input:focus,select:focus{outline:none;border-color:#00d2ff;}
-        @media (max-width:768px){.navbar{flex-direction:column;text-align:center;}.category-filter{top:120px;}.product-grid{grid-template-columns:1fr;}}
+        @media (max-width:768px){.navbar{flex-direction:column;text-align:center;}.product-grid{grid-template-columns:1fr;}}
     </style>
 </head>
 <body>
@@ -85,325 +84,92 @@
         <div id="productGrid" class="product-grid"></div>
     </div>
 
-    <!-- Modal 1: Panel Biasa -->
-    <div id="panelBiasaModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-server"></i> Panel Pterodactyl (Biasa)</h3><button class="close-modal" onclick="closeModal('panelBiasaModal')">&times;</button></div>
-            <div class="section-title">Pilih Kapasitas RAM</div>
-            <div id="ramBiasaOptions" class="package-options"></div>
-            <button class="btn-select" onclick="confirmPanelBiasa()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <!-- Modal Panel Biasa -->
+    <div id="panelBiasaModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Panel Pterodactyl (Biasa)</h3><button class="close-modal" onclick="closeModal('panelBiasaModal')">&times;</button></div><div class="section-title">Pilih RAM</div><div id="ramBiasaOptions" class="package-options"></div><button class="btn-select" onclick="confirmPanelBiasa()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 2: Panel Title -->
-    <div id="panelTitleModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-crown"></i> Panel Pterodactyl (Title)</h3><button class="close-modal" onclick="closeModal('panelTitleModal')">&times;</button></div>
-            <div class="section-title">Pilih RAM</div>
-            <div id="ramTitleOptions" class="package-options"></div>
-            <div class="section-title">Pilih Title</div>
-            <div id="titleOptions" class="package-options"></div>
-            <div class="total-price">Total Harga: <span id="totalPriceTitle">RM 0</span></div>
-            <button class="btn-select" onclick="confirmPanelTitle()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="panelTitleModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Panel Pterodactyl (Title)</h3><button class="close-modal" onclick="closeModal('panelTitleModal')">&times;</button></div><div class="section-title">Pilih RAM</div><div id="ramTitleOptions" class="package-options"></div><div class="section-title">Pilih Title</div><div id="titleOptions" class="package-options"></div><div class="total-price">Total: <span id="totalPriceTitle">RM 0</span></div><button class="btn-select" onclick="confirmPanelTitle()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 3: Murid Bug -->
-    <div id="muridBugModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-bug"></i> Murid Bug</h3><button class="close-modal" onclick="closeModal('muridBugModal')">&times;</button></div>
-            <div id="muridBugOptions" class="package-options"></div>
-            <button class="btn-select" onclick="confirmMuridBug()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="muridBugModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Murid Bug</h3><button class="close-modal" onclick="closeModal('muridBugModal')">&times;</button></div><div id="muridBugOptions" class="package-options"></div><button class="btn-select" onclick="confirmMuridBug()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 4: Bug Manta -->
-    <div id="bugMantaModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-fish"></i> Aplikasi Bug Manta</h3><button class="close-modal" onclick="closeModal('bugMantaModal')">&times;</button></div>
-            <div id="bugMantaOptions" class="package-options"></div>
-            <button class="btn-select" onclick="confirmBugManta()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="bugMantaModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Aplikasi Bug Manta</h3><button class="close-modal" onclick="closeModal('bugMantaModal')">&times;</button></div><div id="bugMantaOptions" class="package-options"></div><button class="btn-select" onclick="confirmBugManta()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 5: Bot WhatsApp -->
-    <div id="botModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fab fa-whatsapp"></i> Bot WhatsApp</h3><button class="close-modal" onclick="closeModal('botModal')">&times;</button></div>
-            <div id="botOptions" class="package-options"></div>
-            <div class="note"><i class="fas fa-info-circle"></i> Custom Bot: request fitur sesuai keinginan</div>
-            <button class="btn-select" onclick="confirmBot()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="botModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Bot WhatsApp</h3><button class="close-modal" onclick="closeModal('botModal')">&times;</button></div><div id="botOptions" class="package-options"></div><button class="btn-select" onclick="confirmBot()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 6: Base APK -->
-    <div id="baseApkModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-mobile-alt"></i> Base APK</h3><button class="close-modal" onclick="closeModal('baseApkModal')">&times;</button></div>
-            <div id="baseApkOptions" class="package-options"></div>
-            <button class="btn-select" onclick="confirmBaseApk()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="baseApkModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Base APK</h3><button class="close-modal" onclick="closeModal('baseApkModal')">&times;</button></div><div id="baseApkOptions" class="package-options"></div><button class="btn-select" onclick="confirmBaseApk()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 7: Web Script WA -->
-    <div id="webScriptModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-globe"></i> Web Create Script WA</h3><button class="close-modal" onclick="closeModal('webScriptModal')">&times;</button></div>
-            <div id="rankOptions" class="package-options"></div>
-            <div class="note"><i class="fas fa-info-circle"></i> Harga Rp 5.000 per rank</div>
-            <button class="btn-select" onclick="confirmWebScript()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="webScriptModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Web Create Script WA</h3><button class="close-modal" onclick="closeModal('webScriptModal')">&times;</button></div><div id="rankOptions" class="package-options"></div><button class="btn-select" onclick="confirmWebScript()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 8: Script VIP -->
-    <div id="scriptVipModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-star"></i> Script VIP</h3><button class="close-modal" onclick="closeModal('scriptVipModal')">&times;</button></div>
-            <div id="scriptVipOptions" class="package-options"></div>
-            <div class="note"><i class="fab fa-telegram"></i> NOTE: Semua script via Telegram</div>
-            <button class="btn-select" onclick="confirmScriptVip()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="scriptVipModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Script VIP</h3><button class="close-modal" onclick="closeModal('scriptVipModal')">&times;</button></div><div id="scriptVipOptions" class="package-options"></div><div class="note"><i class="fab fa-telegram"></i> Via Telegram</div><button class="btn-select" onclick="confirmScriptVip()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 9: Paid Promote WA -->
-    <div id="paidPromoteModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-chart-line"></i> Paid Promote WA</h3><button class="close-modal" onclick="closeModal('paidPromoteModal')">&times;</button></div>
-            <div id="paidPromoteOptions" class="package-options"></div>
-            <div id="customPromoteForm" style="display:none; margin-top:1rem;">
-                <input type="text" id="itemName" placeholder="Nama item">
-                <input type="number" id="itemPrice" placeholder="Harga item (RM)">
-            </div>
-            <div class="note"><i class="fas fa-info-circle"></i> Promote Sampai Sold: harga mengikuti item</div>
-            <button class="btn-select" onclick="confirmPaidPromote()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="paidPromoteModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Paid Promote WA</h3><button class="close-modal" onclick="closeModal('paidPromoteModal')">&times;</button></div><div id="paidPromoteOptions" class="package-options"></div><div id="customPromoteForm" style="display:none"><input type="text" id="itemName" placeholder="Nama item"><input type="number" id="itemPrice" placeholder="Harga (RM)"></div><button class="btn-select" onclick="confirmPaidPromote()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 10: List MM/MC Muz -->
-    <div id="listMmMcModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-list"></i> List MM/MC Muz</h3><button class="close-modal" onclick="closeModal('listMmMcModal')">&times;</button></div>
-            <div id="listMmMcOptions" class="package-options"></div>
-            <div id="customSwapForm" style="display:none; margin-top:1rem;">
-                <input type="text" id="swapFrom" placeholder="Akun asal">
-                <input type="text" id="swapTo" placeholder="Akun tujuan">
-            </div>
-            <div class="note"><i class="fas fa-exclamation-triangle"></i> Swap RM20 (Mahal karena resiko)</div>
-            <button class="btn-select" onclick="confirmListMmMc()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="listMmMcModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>List MM/MC Muz</h3><button class="close-modal" onclick="closeModal('listMmMcModal')">&times;</button></div><div id="listMmMcOptions" class="package-options"></div><div id="customSwapForm" style="display:none"><input type="text" id="swapFrom" placeholder="Akun asal"><input type="text" id="swapTo" placeholder="Akun tujuan"></div><button class="btn-select" onclick="confirmListMmMc()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 11: DM Free Fire -->
-    <div id="dmFreeFireModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-fire"></i> Top Up Diamond Free Fire</h3><button class="close-modal" onclick="closeModal('dmFreeFireModal')">&times;</button></div>
-            <div id="dmFreeFireOptions" class="package-options"></div>
-            <input type="text" id="ffId" placeholder="Masukkan ID Free Fire">
-            <button class="btn-select" onclick="confirmDmFreeFire()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="dmFreeFireModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Top Up Diamond FF</h3><button class="close-modal" onclick="closeModal('dmFreeFireModal')">&times;</button></div><div id="dmFreeFireOptions" class="package-options"></div><input type="text" id="ffId" placeholder="ID Free Fire"><button class="btn-select" onclick="confirmDmFreeFire()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 12: Robux -->
-    <div id="robuxModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-dollar-sign"></i> Top Up Robux</h3><button class="close-modal" onclick="closeModal('robuxModal')">&times;</button></div>
-            <div id="robuxOptions" class="package-options"></div>
-            <div id="customRobuxForm" style="display:none; margin-top:1rem;">
-                <input type="number" id="customRobux" placeholder="Jumlah Robux">
-            </div>
-            <input type="text" id="robloxUser" placeholder="Masukkan Username Roblox">
-            <button class="btn-select" onclick="confirmRobux()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="robuxModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Top Up Robux</h3><button class="close-modal" onclick="closeModal('robuxModal')">&times;</button></div><div id="robuxOptions" class="package-options"></div><div id="customRobuxForm" style="display:none"><input type="number" id="customRobux" placeholder="Jumlah Robux"></div><input type="text" id="robloxUser" placeholder="Username Roblox"><button class="btn-select" onclick="confirmRobux()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 13: DM ML -->
-    <div id="dmMlModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fas fa-gamepad"></i> Top Up Diamond Mobile Legends</h3><button class="close-modal" onclick="closeModal('dmMlModal')">&times;</button></div>
-            <div id="dmMlOptions" class="package-options"></div>
-            <input type="text" id="mlId" placeholder="Masukkan ID Mobile Legends">
-            <button class="btn-select" onclick="confirmDmMl()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="dmMlModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Top Up Diamond ML</h3><button class="close-modal" onclick="closeModal('dmMlModal')">&times;</button></div><div id="dmMlOptions" class="package-options"></div><input type="text" id="mlId" placeholder="ID Mobile Legends"><button class="btn-select" onclick="confirmDmMl()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 14: Boost Like TikTok -->
-    <div id="boostLikeTikTokModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fab fa-tiktok"></i> Boost Like TikTok</h3><button class="close-modal" onclick="closeModal('boostLikeTikTokModal')">&times;</button></div>
-            <div id="boostLikeOptions" class="package-options"></div>
-            <button class="btn-select" onclick="confirmBoostLike()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="boostLikeTikTokModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Boost Like TikTok</h3><button class="close-modal" onclick="closeModal('boostLikeTikTokModal')">&times;</button></div><div id="boostLikeOptions" class="package-options"></div><button class="btn-select" onclick="confirmBoostLike()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 15: Boost Followers TikTok -->
-    <div id="boostFollowersTikTokModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fab fa-tiktok"></i> Boost Followers TikTok</h3><button class="close-modal" onclick="closeModal('boostFollowersTikTokModal')">&times;</button></div>
-            <div id="boostFollowersOptions" class="package-options"></div>
-            <button class="btn-select" onclick="confirmBoostFollowers()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="boostFollowersTikTokModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Boost Followers TikTok</h3><button class="close-modal" onclick="closeModal('boostFollowersTikTokModal')">&times;</button></div><div id="boostFollowersOptions" class="package-options"></div><button class="btn-select" onclick="confirmBoostFollowers()">Pilih dan Lanjutkan</button></div></div>
 
-    <!-- Modal 16: Boost View TikTok -->
-    <div id="boostViewTikTokModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h3><i class="fab fa-tiktok"></i> Boost View TikTok</h3><button class="close-modal" onclick="closeModal('boostViewTikTokModal')">&times;</button></div>
-            <div id="boostViewOptions" class="package-options"></div>
-            <button class="btn-select" onclick="confirmBoostView()">Pilih dan Lanjutkan</button>
-        </div>
-    </div>
+    <div id="boostViewTikTokModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Boost View TikTok</h3><button class="close-modal" onclick="closeModal('boostViewTikTokModal')">&times;</button></div><div id="boostViewOptions" class="package-options"></div><button class="btn-select" onclick="confirmBoostView()">Pilih dan Lanjutkan</button></div></div>
 
     <script>
-        // ==================== DATA PRODUK ====================
+        // DATA PRODUK
         const products = [
-            {id:1,name:"Panel Pterodactyl (Biasa)",price:"RM 0.40 - RM 2",priceIdr:"Rp 1.400 - Rp 7.000",icon:"🖥️",desc:"Panel hosting game - tanpa title",category:"Panel",features:["1 GB - Unlimited","Pilih RAM"],type:"panelBiasa"},
-            {id:2,name:"Panel Pterodactyl (Title)",price:"RM 4.40 - RM 31",priceIdr:"Rp 15.400 - Rp 108.500",icon:"👑",desc:"Panel dengan title Reseller/PT/Owner/CEO",category:"Panel",features:["Reseller","PT","Owner","CEO"],type:"panelTitle"},
-            {id:3,name:"Murid Bug",price:"RM 2 - RM 9",priceIdr:"Rp 7.000 - Rp 31.500",icon:"🐛",desc:"Bug exploit untuk berbagai layanan",category:"Bug",features:["Akses","Reseller","VIP","Owner","CEO"],type:"muridBug"},
-            {id:4,name:"Aplikasi Bug Manta",price:"RM 1 - RM 25",priceIdr:"Rp 3.500 - Rp 87.500",icon:"🦈",desc:"Unlimited quota bug for Manta",category:"Bug",features:["Harian","Bulanan","Full Up","Reseller","PT"],type:"bugManta"},
-            {id:5,name:"Bot WhatsApp",price:"RM 3 - RM 10",priceIdr:"Rp 10.500 - Rp 35.000",icon:"🤖",desc:"Bot WhatsApp dengan berbagai paket",category:"Bot",features:["6 Paket Tersedia"],type:"bot"},
-            {id:6,name:"Script Auto Order",price:"Rp 35.000",priceIdr:"Rp 35.000",icon:"📝",desc:"Auto order script for marketplace",category:"Script",features:["Multi Account","Anti Detect"],type:"normal"},
-            {id:7,name:"Base APK",price:"RM 3 - RM 10",priceIdr:"Rp 10.500 - Rp 35.000",icon:"📱",desc:"Base APK berbagai pilihan",category:"BaseAPK",features:["8 Pilihan Base APK"],type:"baseApk"},
-            {id:8,name:"Web Create Script WA",price:"Rp 5.000/rank",priceIdr:"Rp 5.000",icon:"🌐",desc:"Web script WA dengan rank",category:"Script",features:["20 Rank Tersedia"],type:"webScript"},
-            {id:9,name:"Script VIP",price:"RM 1 - RM 3",priceIdr:"Rp 3.500 - Rp 10.500",icon:"⭐",desc:"Koleksi script premium via Telegram",category:"Script",features:["12 Script Tersedia"],type:"scriptVip"},
-            {id:10,name:"Paid Promote WA",price:"RM 1 - RM 7",priceIdr:"Rp 3.500 - Rp 24.500",icon:"📢",desc:"Promote produk di WhatsApp",category:"Promote",features:["4 Paket Tersedia"],type:"paidPromote"},
-            {id:11,name:"List MM/MC Muz",price:"FREE - RM 20",priceIdr:"FREE - Rp 70.000",icon:"📋",desc:"List MM/MC Muz",category:"Script",features:["7 Pilihan Tersedia"],type:"listMmMc"},
-            {id:12,name:"DM Free Fire",price:"RM 2 - RM 335",priceIdr:"Rp 7.000 - Rp 1.172.500",icon:"🔥",desc:"Top Up Diamond Free Fire",category:"Game",features:["15 Pilihan DM"],type:"dmFreeFire"},
-            {id:13,name:"Robux",price:"RM 4 - RM 250",priceIdr:"Rp 14.000 - Rp 875.000",icon:"💰",desc:"Top Up Robux Roblox",category:"Game",features:["9 Pilihan + Custom"],type:"robux"},
-            {id:14,name:"DM ML",price:"RM 1.50 - RM 503",priceIdr:"Rp 5.250 - Rp 1.760.500",icon:"⚔️",desc:"Top Up Diamond Mobile Legends",category:"Game",features:["11 Pilihan DM"],type:"dmMl"},
-            {id:15,name:"Boost Like TikTok",price:"RM 3 - RM 23",priceIdr:"Rp 10.500 - Rp 80.500",icon:"❤️",desc:"Boost like untuk TikTok",category:"TikTok",features:["5 Paket Tersedia"],type:"boostLikeTikTok"},
-            {id:16,name:"Boost Followers TikTok",price:"RM 2 - RM 33",priceIdr:"Rp 7.000 - Rp 115.500",icon:"👥",desc:"Boost followers untuk TikTok",category:"TikTok",features:["5 Paket Tersedia"],type:"boostFollowersTikTok"},
-            {id:17,name:"Boost View TikTok",price:"RM 2 - RM 20",priceIdr:"Rp 7.000 - Rp 70.000",icon:"👁️",desc:"Boost view untuk TikTok",category:"TikTok",features:["5 Paket Tersedia"],type:"boostViewTikTok"}
+            {id:1,name:"Panel Pterodactyl (Biasa)",price:"RM 0.40 - RM 2",priceIdr:"Rp 1.400 - Rp 7.000",icon:"🖥️",desc:"Panel hosting game",category:"Panel",features:["1 GB - Unlimited"],type:"panelBiasa"},
+            {id:2,name:"Panel Pterodactyl (Title)",price:"RM 4.40 - RM 31",priceIdr:"Rp 15.400 - Rp 108.500",icon:"👑",desc:"Panel dengan title",category:"Panel",features:["Reseller","PT","Owner","CEO"],type:"panelTitle"},
+            {id:3,name:"Murid Bug",price:"RM 2 - RM 9",priceIdr:"Rp 7.000 - Rp 31.500",icon:"🐛",desc:"Bug exploit",category:"Bug",features:["5 Paket"],type:"muridBug"},
+            {id:4,name:"Aplikasi Bug Manta",price:"RM 1 - RM 25",priceIdr:"Rp 3.500 - Rp 87.500",icon:"🦈",desc:"Unlimited quota bug",category:"Bug",features:["5 Paket"],type:"bugManta"},
+            {id:5,name:"Bot WhatsApp",price:"RM 3 - RM 10",priceIdr:"Rp 10.500 - Rp 35.000",icon:"🤖",desc:"Bot WhatsApp",category:"Bot",features:["6 Paket"],type:"bot"},
+            {id:6,name:"Script Auto Order",price:"Rp 35.000",priceIdr:"Rp 35.000",icon:"📝",desc:"Auto order script",category:"Script",features:["Multi Account"],type:"normal"},
+            {id:7,name:"Base APK",price:"RM 3 - RM 10",priceIdr:"Rp 10.500 - Rp 35.000",icon:"📱",desc:"Base APK",category:"BaseAPK",features:["8 Pilihan"],type:"baseApk"},
+            {id:8,name:"Web Create Script WA",price:"Rp 5.000/rank",priceIdr:"Rp 5.000",icon:"🌐",desc:"Web script WA",category:"Script",features:["20 Rank"],type:"webScript"},
+            {id:9,name:"Script VIP",price:"RM 1 - RM 3",priceIdr:"Rp 3.500 - Rp 10.500",icon:"⭐",desc:"Script premium",category:"Script",features:["12 Script"],type:"scriptVip"},
+            {id:10,name:"Paid Promote WA",price:"RM 1 - RM 7",priceIdr:"Rp 3.500 - Rp 24.500",icon:"📢",desc:"Promote WA",category:"Promote",features:["4 Paket"],type:"paidPromote"},
+            {id:11,name:"List MM/MC Muz",price:"FREE - RM 20",priceIdr:"FREE - Rp 70.000",icon:"📋",desc:"List MM/MC",category:"Script",features:["7 Pilihan"],type:"listMmMc"},
+            {id:12,name:"DM Free Fire",price:"RM 2 - RM 335",priceIdr:"Rp 7.000 - Rp 1.172.500",icon:"🔥",desc:"Top Up Diamond FF",category:"Game",features:["15 Pilihan"],type:"dmFreeFire"},
+            {id:13,name:"Robux",price:"RM 4 - RM 250",priceIdr:"Rp 14.000 - Rp 875.000",icon:"💰",desc:"Top Up Robux",category:"Game",features:["9 Pilihan"],type:"robux"},
+            {id:14,name:"DM ML",price:"RM 1.50 - RM 503",priceIdr:"Rp 5.250 - Rp 1.760.500",icon:"⚔️",desc:"Top Up Diamond ML",category:"Game",features:["11 Pilihan"],type:"dmMl"},
+            {id:15,name:"Boost Like TikTok",price:"RM 3 - RM 23",priceIdr:"Rp 10.500 - Rp 80.500",icon:"❤️",desc:"Boost like",category:"TikTok",features:["5 Paket"],type:"boostLikeTikTok"},
+            {id:16,name:"Boost Followers TikTok",price:"RM 2 - RM 33",priceIdr:"Rp 7.000 - Rp 115.500",icon:"👥",desc:"Boost followers",category:"TikTok",features:["5 Paket"],type:"boostFollowersTikTok"},
+            {id:17,name:"Boost View TikTok",price:"RM 2 - RM 20",priceIdr:"Rp 7.000 - Rp 70.000",icon:"👁️",desc:"Boost view",category:"TikTok",features:["5 Paket"],type:"boostViewTikTok"}
         ];
 
-        // ==================== DATA PAKET ====================
-        const ramData = [
-            {name:"1 GB",rm:"0.40",idr:"1400"},{name:"2 GB",rm:"0.50",idr:"1750"},
-            {name:"3 GB",rm:"0.60",idr:"2100"},{name:"4 GB",rm:"0.70",idr:"2450"},
-            {name:"5 GB",rm:"0.80",idr:"2800"},{name:"6 GB",rm:"0.90",idr:"3150"},
-            {name:"7 GB",rm:"1.00",idr:"3500"},{name:"8 GB",rm:"1.10",idr:"3850"},
-            {name:"9 GB",rm:"1.20",idr:"4200"},{name:"Unlimited",rm:"2.00",idr:"7000"}
-        ];
+        // DATA PAKET
+        const ramData = [{name:"1 GB",rm:"0.40",idr:"1400"},{name:"2 GB",rm:"0.50",idr:"1750"},{name:"3 GB",rm:"0.60",idr:"2100"},{name:"4 GB",rm:"0.70",idr:"2450"},{name:"5 GB",rm:"0.80",idr:"2800"},{name:"6 GB",rm:"0.90",idr:"3150"},{name:"7 GB",rm:"1.00",idr:"3500"},{name:"8 GB",rm:"1.10",idr:"3850"},{name:"9 GB",rm:"1.20",idr:"4200"},{name:"Unlimited",rm:"2.00",idr:"7000"}];
+        const titleData = [{name:"Reseller",rm:"4",idr:"14000"},{name:"PT",rm:"25",idr:"87500"},{name:"Owner",rm:"5",idr:"17500"},{name:"CEO",rm:"6",idr:"21000"}];
+        const muridBugData = [{name:"Akses",rm:"2",idr:"7000"},{name:"Reseller",rm:"4",idr:"14000"},{name:"VIP",rm:"5",idr:"17500"},{name:"Owner",rm:"7",idr:"24500"},{name:"CEO",rm:"9",idr:"31500"}];
+        const bugMantaData = [{name:"Member Harian",rm:"1",idr:"3500"},{name:"Member Bulanan",rm:"10",idr:"35000"},{name:"Full Up",rm:"15",idr:"52500"},{name:"Reseller",rm:"20",idr:"70000"},{name:"PT",rm:"25",idr:"87500"}];
+        const botData = [{name:"Bot Jaga Group",rm:"3",idr:"10500"},{name:"Bot Panel",rm:"3",idr:"10500"},{name:"Bot Promote",rm:"3",idr:"10500"},{name:"Bot Sederhana",rm:"4",idr:"14000"},{name:"Bot MD",rm:"7",idr:"24500"},{name:"Custom Bot",rm:"10",idr:"35000"}];
+        const baseApkData = [{name:"Xcube",rm:"10",idr:"35000"},{name:"Miyako",rm:"3",idr:"10500"},{name:"RVSDP",rm:"5",idr:"17500"},{name:"Dheat Core",rm:"5",idr:"17500"},{name:"Magnum X",rm:"10",idr:"35000"},{name:"Dheat Core V2",rm:"10",idr:"35000"},{name:"Glacier",rm:"5",idr:"17500"},{name:"Valhalla",rm:"7",idr:"24500"}];
+        const rankData = ["⚪ Silver","🟠 Gold","🔵 Platinum","🟣 Diamond","🔴 Master","🟡 Grandmaster","☣️ Legend","♋ Heroic","Ⓜ️ Mytich","🌀 Supreme","✡️ Eternal","🪯 Imortal","♒ Phantom","🚹 Dominator","⚛️ Conqueror","☦️ Emperor","✡️ Nether","🔯 Aether","♋ Wither","☯️ Epsilon"];
+        const scriptVipData = [{name:"Sc Auto Order Notel",rm:"3",idr:"10500"},{name:"Sc Auto Order",rm:"2",idr:"7000"},{name:"Sc Fix Merah",rm:"1",idr:"3500"},{name:"Sc Gacha",rm:"2",idr:"7000"},{name:"Sc AI",rm:"3",idr:"10500"},{name:"Sc Asisten",rm:"2",idr:"7000"},{name:"Sc Jaseb",rm:"3",idr:"10500"},{name:"SC Auto Report",rm:"1",idr:"3500"},{name:"Sc Ubot",rm:"1",idr:"3500"},{name:"Sc Nted V9",rm:"1",idr:"3500"},{name:"Sc Zerk MD",rm:"1",idr:"3500"},{name:"Sc Tools",rm:"1",idr:"3500"}];
+        const promoteData = [{name:"Promote 1x",rm:"1",idr:"3500",isCustom:false},{name:"Promote 5x",rm:"3",idr:"10500",isCustom:false},{name:"Promote 10x",rm:"7",idr:"24500",isCustom:false},{name:"Promote Sampai Sold",rm:"0",idr:"0",isCustom:true}];
+        const listData = [{name:"1-99",rm:"0",idr:"0",isFree:true},{name:"100-199",rm:"0.50",idr:"1750"},{name:"200-299",rm:"1",idr:"3500"},{name:"300-399",rm:"2",idr:"7000"},{name:"400-499",rm:"3",idr:"10500"},{name:"500-1k++",rm:"5",idr:"17500"},{name:"Swap",rm:"20",idr:"70000",isSwap:true}];
+        const dmFFData = [{amount:"25 DM",rm:"2",idr:"7000"},{amount:"50 DM",rm:"3",idr:"10500"},{amount:"100 DM",rm:"5",idr:"17500"},{amount:"200 DM",rm:"8",idr:"28000"},{amount:"300 DM",rm:"12",idr:"42000"},{amount:"310 DM",rm:"13",idr:"45500"},{amount:"520 DM",rm:"18",idr:"63000"},{amount:"830 DM",rm:"30",idr:"105000"},{amount:"930 DM",rm:"34",idr:"119000"},{amount:"1060 DM",rm:"35",idr:"122500"},{amount:"1580 DM",rm:"52",idr:"182000"},{amount:"2180 DM",rm:"70",idr:"245000"},{amount:"3240 DM",rm:"105",idr:"367500"},{amount:"5600 DM",rm:"165",idr:"577500"},{amount:"11500 DM",rm:"335",idr:"1172500"}];
+        const robuxData = [{amount:"100 Robux",rm:"4",idr:"14000"},{amount:"300 Robux",rm:"8",idr:"28000"},{amount:"500 Robux",rm:"15",idr:"52500"},{amount:"1k Robux",rm:"30",idr:"105000"},{amount:"1.5k Robux",rm:"50",idr:"175000"},{amount:"2k Robux",rm:"60",idr:"210000"},{amount:"3k Robux",rm:"100",idr:"350000"},{amount:"5k Robux",rm:"170",idr:"595000"},{amount:"10k Robux",rm:"250",idr:"875000"},{amount:"Custom Robux",rm:"0",idr:"0",isCustom:true}];
+        const dmMlData = [{amount:"13 DM",rm:"1.50",idr:"5250"},{amount:"42 DM",rm:"4",idr:"14000"},{amount:"70 DM",rm:"7",idr:"24500"},{amount:"140 DM",rm:"12",idr:"42000"},{amount:"284 DM",rm:"22",idr:"77000"},{amount:"355 DM",rm:"28",idr:"98000"},{amount:"429 DM",rm:"34",idr:"119000"},{amount:"716 DM",rm:"55",idr:"192500"},{amount:"1446 DM",rm:"105",idr:"367500"},{amount:"2976 DM",rm:"207",idr:"724500"},{amount:"7502 DM",rm:"503",idr:"1760500"}];
+        const boostLikeData = [{amount:"2k Likes",rm:"3",idr:"10500"},{amount:"5k Likes",rm:"7",idr:"24500"},{amount:"10k Likes",rm:"12",idr:"42000"},{amount:"20k Likes",rm:"20",idr:"70000"},{amount:"30k Likes",rm:"23",idr:"80500"}];
+        const boostFollowersData = [{amount:"100 Followers",rm:"2",idr:"7000"},{amount:"500 Followers",rm:"7",idr:"24500"},{amount:"1k Followers",rm:"12",idr:"42000"},{amount:"2k Followers",rm:"22",idr:"77000"},{amount:"3k Followers",rm:"33",idr:"115500"}];
+        const boostViewData = [{amount:"2k Views",rm:"2",idr:"7000"},{amount:"5k Views",rm:"4",idr:"14000"},{amount:"10k Views",rm:"7",idr:"24500"},{amount:"20k Views",rm:"10",idr:"35000"},{amount:"50k Views",rm:"20",idr:"70000"}];
 
-        const titleData = [
-            {name:"Reseller",rm:"4",idr:"14000"},{name:"PT (Premium)",rm:"25",idr:"87500"},
-            {name:"Owner",rm:"5",idr:"17500"},{name:"CEO",rm:"6",idr:"21000"}
-        ];
-
-        const muridBugData = [
-            {name:"Akses",rm:"2",idr:"7000"},{name:"Reseller",rm:"4",idr:"14000"},
-            {name:"VIP",rm:"5",idr:"17500"},{name:"Owner",rm:"7",idr:"24500"},
-            {name:"CEO",rm:"9",idr:"31500"}
-        ];
-
-        const bugMantaData = [
-            {name:"Member Harian (1 Hari)",rm:"1",idr:"3500"},
-            {name:"Member Bulanan (30 Hari)",rm:"10",idr:"35000"},
-            {name:"Full Up (Permanent)",rm:"15",idr:"52500"},
-            {name:"Reseller (Permanent)",rm:"20",idr:"70000"},
-            {name:"PT (Permanent)",rm:"25",idr:"87500"}
-        ];
-
-        const botData = [
-            {name:"Bot Jaga Group",rm:"3",idr:"10500"},{name:"Bot Panel via WS",rm:"3",idr:"10500"},
-            {name:"Bot Promote",rm:"3",idr:"10500"},{name:"Bot Sederhana (300+ fitur)",rm:"4",idr:"14000"},
-            {name:"Bot MD (2000+ fitur)",rm:"7",idr:"24500"},{name:"Custom Bot (Request fitur)",rm:"10",idr:"35000"}
-        ];
-
-        const baseApkData = [
-            {name:"Base APK Xcube (Ada RAT)",rm:"10",idr:"35000"},{name:"Base APK Miyako (No RAT)",rm:"3",idr:"10500"},
-            {name:"Base APK RVSDP (No RAT)",rm:"5",idr:"17500"},{name:"Base APK Dheat Core (No RAT)",rm:"5",idr:"17500"},
-            {name:"Base APK Magnum X (Ada RAT)",rm:"10",idr:"35000"},{name:"Base APK Dheat Core V2 (Ada RAT)",rm:"10",idr:"35000"},
-            {name:"Base APK Glacier (Ada RAT)",rm:"5",idr:"17500"},{name:"Base APK Valhalla (No RAT)",rm:"7",idr:"24500"}
-        ];
-
-        const rankData = [
-            "⚪ Silver","🟠 Gold","🔵 Platinum","🟣 Diamond","🔴 Master","🟡 Grandmaster",
-            "☣️ Legend","♋ Heroic","Ⓜ️ Mytich","🌀 Supreme","✡️ Eternal","🪯 Imortal",
-            "♒ Phantom","🚹 Dominator","⚛️ Conqueror","☦️ Emperor","✡️ Nether","🔯 Aether","♋ Wither","☯️ Epsilon"
-        ];
-
-        const scriptVipData = [
-            {name:"Sc Auto Order Notel",rm:"3",idr:"10500"},{name:"Sc Auto Order",rm:"2",idr:"7000"},
-            {name:"Sc Fix Merah",rm:"1",idr:"3500"},{name:"Sc Gacha",rm:"2",idr:"7000"},
-            {name:"Sc AI",rm:"3",idr:"10500"},{name:"Sc Asisten",rm:"2",idr:"7000"},
-            {name:"Sc Jaseb",rm:"3",idr:"10500"},{name:"SC Auto Report Telegram",rm:"1",idr:"3500"},
-            {name:"Sc Ubot Auto Order",rm:"1",idr:"3500"},{name:"Sc Nted V9",rm:"1",idr:"3500"},
-            {name:"Sc Zerk MD",rm:"1",idr:"3500"},{name:"Sc Tools",rm:"1",idr:"3500"}
-        ];
-
-        const promoteData = [
-            {name:"Promote 1x",rm:"1",idr:"3500",isCustom:false},
-            {name:"Promote 5x",rm:"3",idr:"10500",isCustom:false},
-            {name:"Promote 10x",rm:"7",idr:"24500",isCustom:false},
-            {name:"Promote Sampai Sold",rm:"0",idr:"0",isCustom:true}
-        ];
-
-        const listData = [
-            {name:"1-99",rm:"0",idr:"0",isFree:true},
-            {name:"100-199",rm:"0.50",idr:"1750"},{name:"200-299",rm:"1",idr:"3500"},
-            {name:"300-399",rm:"2",idr:"7000"},{name:"400-499",rm:"3",idr:"10500"},
-            {name:"500-1k++",rm:"5",idr:"17500"},{name:"Swap",rm:"20",idr:"70000",isSwap:true}
-        ];
-
-        const dmFFData = [
-            {amount:"25 DM",rm:"2",idr:"7000"},{amount:"50 DM",rm:"3",idr:"10500"},
-            {amount:"100 DM",rm:"5",idr:"17500"},{amount:"200 DM",rm:"8",idr:"28000"},
-            {amount:"300 DM",rm:"12",idr:"42000"},{amount:"310 DM",rm:"13",idr:"45500"},
-            {amount:"520 DM",rm:"18",idr:"63000"},{amount:"830 DM",rm:"30",idr:"105000"},
-            {amount:"930 DM",rm:"34",idr:"119000"},{amount:"1060 DM",rm:"35",idr:"122500"},
-            {amount:"1580 DM",rm:"52",idr:"182000"},{amount:"2180 DM",rm:"70",idr:"245000"},
-            {amount:"3240 DM",rm:"105",idr:"367500"},{amount:"5600 DM",rm:"165",idr:"577500"},
-            {amount:"11500 DM",rm:"335",idr:"1172500"}
-        ];
-
-        const robuxData = [
-            {amount:"100 Robux",rm:"4",idr:"14000"},{amount:"300 Robux",rm:"8",idr:"28000"},
-            {amount:"500 Robux",rm:"15",idr:"52500"},{amount:"1.000 Robux",rm:"30",idr:"105000"},
-            {amount:"1.500 Robux",rm:"50",idr:"175000"},{amount:"2.000 Robux",rm:"60",idr:"210000"},
-            {amount:"3.000 Robux",rm:"100",idr:"350000"},{amount:"5.000 Robux",rm:"170",idr:"595000"},
-            {amount:"10.000 Robux",rm:"250",idr:"875000"},{amount:"Custom Robux",rm:"0",idr:"0",isCustom:true}
-        ];
-
-        const dmMlData = [
-            {amount:"13 DM",rm:"1.50",idr:"5250"},{amount:"42 DM",rm:"4",idr:"14000"},
-            {amount:"70 DM",rm:"7",idr:"24500"},{amount:"140 DM",rm:"12",idr:"42000"},
-            {amount:"284 DM",rm:"22",idr:"77000"},{amount:"355 DM",rm:"28",idr:"98000"},
-            {amount:"429 DM",rm:"34",idr:"119000"},{amount:"716 DM",rm:"55",idr:"192500"},
-            {amount:"1446 DM",rm:"105",idr:"367500"},{amount:"2976 DM",rm:"207",idr:"724500"},
-            {amount:"7502 DM",rm:"503",idr:"1760500"}
-        ];
-
-        const boostLikeData = [
-            {amount:"2k Likes",rm:"3",idr:"10500"},{amount:"5k Likes",rm:"7",idr:"24500"},
-            {amount:"10k Likes",rm:"12",idr:"42000"},{amount:"20k Likes",rm:"20",idr:"70000"},
-            {amount:"30k Likes",rm:"23",idr:"80500"}
-        ];
-
-        const boostFollowersData = [
-            {amount:"100 Followers",rm:"2",idr:"7000"},{amount:"500 Followers",rm:"7",idr:"24500"},
-            {amount:"1k Followers",rm:"12",idr:"42000"},{amount:"2k Followers",rm:"22",idr:"77000"},
-            {amount:"3k Followers",rm:"33",idr:"115500"}
-        ];
-
-        const boostViewData = [
-            {amount:"2k Views",rm:"2",idr:"7000"},{amount:"5k Views",rm:"4",idr:"14000"},
-            {amount:"10k Views",rm:"7",idr:"24500"},{amount:"20k Views",rm:"10",idr:"35000"},
-            {amount:"50k Views",rm:"20",idr:"70000"}
-        ];
-
-        // ==================== VARIABEL ====================
         let currentFilter = 'all';
         let selectedProduct = null;
         let selectedItem = null;
         let selectedRam = null;
-        let selectedTitle = null;
         let selectedRamTitle = null;
         let selectedTitleItem = null;
 
-        // ==================== AUTH ====================
         function checkAuth() {
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            if (!currentUser) window.location.href = 'login.html';
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return null;
+            }
             return currentUser;
         }
 
@@ -412,545 +178,169 @@
             window.location.href = 'index.html';
         }
 
-        // ==================== RENDER PRODUCTS ====================
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             let filtered = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter);
-            
             if (filtered.length === 0) {
-                grid.innerHTML = '<div style="text-align:center; padding:3rem; color:white;">No products in this category</div>';
+                grid.innerHTML = '<div style="text-align:center; padding:3rem; color:white;">No products</div>';
                 return;
             }
-            
-            grid.innerHTML = filtered.map(product => `
-                <div class="product-card" onclick="buyProduct(${product.id})">
-                    <div class="badge-category">${product.category}</div>
-                    <div class="product-icon">${product.icon}</div>
-                    <div class="product-title">${product.name}</div>
-                    <div class="product-price">${product.price}<br><span style="font-size:0.8rem; color:#666;">${product.priceIdr}</span></div>
-                    <div class="product-desc">${product.desc}</div>
-                    <div class="product-features">${product.features.map(f => `<span>✓ ${f}</span>`).join('')}</div>
+            grid.innerHTML = filtered.map(p => `
+                <div class="product-card" onclick="buyProduct(${p.id})">
+                    <div class="badge-category">${p.category}</div>
+                    <div class="product-icon">${p.icon}</div>
+                    <div class="product-title">${p.name}</div>
+                    <div class="product-price">${p.price}<br><span style="font-size:0.8rem;">${p.priceIdr}</span></div>
+                    <div class="product-desc">${p.desc}</div>
+                    <div class="product-features">${p.features.map(f => `<span>✓ ${f}</span>`).join('')}</div>
                     <button class="btn-buy">Buy Now →</button>
                 </div>
             `).join('');
         }
 
-        function filterProducts(category) {
-            currentFilter = category;
+        function filterProducts(cat) {
+            currentFilter = cat;
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.textContent.toLowerCase() === category.toLowerCase() || (category === 'all' && btn.textContent === 'All')) {
+                if (btn.textContent.toLowerCase() === cat.toLowerCase() || (cat === 'all' && btn.textContent === 'All')) {
                     btn.classList.add('active');
                 }
             });
             renderProducts();
         }
 
-        // ==================== BUY PRODUCT ====================
         function buyProduct(productId) {
-            checkAuth();
-            selectedProduct = products.find(p => p.id === productId);
-            document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+            const user = checkAuth();
+            if (!user) return;
             
+            selectedProduct = products.find(p => p.id === productId);
+            
+            if (selectedProduct.type === 'normal') {
+                // Langsung checkout untuk produk normal
+                const price = parseInt(selectedProduct.priceIdr.replace(/\./g,'').replace('Rp','').trim());
+                proceedToCheckout(price, selectedProduct.name);
+                return;
+            }
+            
+            // Buka modal untuk produk yang punya pilihan
             const modalId = selectedProduct.type + 'Modal';
             const modal = document.getElementById(modalId);
-            if (modal) modal.classList.add('active');
-            
-            // Load options berdasarkan tipe
-            if (selectedProduct.type === 'panelBiasa') loadRamBiasaOptions();
-            else if (selectedProduct.type === 'panelTitle') { loadRamTitleOptions(); loadTitleOptions(); }
-            else if (selectedProduct.type === 'muridBug') loadMuridBugOptions();
-            else if (selectedProduct.type === 'bugManta') loadBugMantaOptions();
-            else if (selectedProduct.type === 'bot') loadBotOptions();
-            else if (selectedProduct.type === 'baseApk') loadBaseApkOptions();
-            else if (selectedProduct.type === 'webScript') loadRankOptions();
-            else if (selectedProduct.type === 'scriptVip') loadScriptVipOptions();
-            else if (selectedProduct.type === 'paidPromote') loadPaidPromoteOptions();
-            else if (selectedProduct.type === 'listMmMc') loadListOptions();
-            else if (selectedProduct.type === 'dmFreeFire') loadDmFFOptions();
-            else if (selectedProduct.type === 'robux') loadRobuxOptions();
-            else if (selectedProduct.type === 'dmMl') loadDmMlOptions();
-            else if (selectedProduct.type === 'boostLikeTikTok') loadBoostLikeOptions();
-            else if (selectedProduct.type === 'boostFollowersTikTok') loadBoostFollowersOptions();
-            else if (selectedProduct.type === 'boostViewTikTok') loadBoostViewOptions();
+            if (modal) {
+                document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+                modal.classList.add('active');
+                loadOptionsForProduct();
+            }
         }
 
-        // ==================== PANEL BIASA ====================
-        function loadRamBiasaOptions() {
+        function loadOptionsForProduct() {
+            if (selectedProduct.type === 'panelBiasa') loadRamBiasa();
+            else if (selectedProduct.type === 'panelTitle') { loadRamTitle(); loadTitleOpt(); }
+            else if (selectedProduct.type === 'muridBug') loadMuridBug();
+            else if (selectedProduct.type === 'bugManta') loadBugManta();
+            else if (selectedProduct.type === 'bot') loadBot();
+            else if (selectedProduct.type === 'baseApk') loadBaseApk();
+            else if (selectedProduct.type === 'webScript') loadRank();
+            else if (selectedProduct.type === 'scriptVip') loadScriptVip();
+            else if (selectedProduct.type === 'paidPromote') loadPromote();
+            else if (selectedProduct.type === 'listMmMc') loadList();
+            else if (selectedProduct.type === 'dmFreeFire') loadDmFF();
+            else if (selectedProduct.type === 'robux') loadRobux();
+            else if (selectedProduct.type === 'dmMl') loadDmMl();
+            else if (selectedProduct.type === 'boostLikeTikTok') loadBoostLike();
+            else if (selectedProduct.type === 'boostFollowersTikTok') loadBoostFollowers();
+            else if (selectedProduct.type === 'boostViewTikTok') loadBoostView();
+        }
+
+        function loadRamBiasa() {
             const container = document.getElementById('ramBiasaOptions');
-            if (!container) return;
-            container.innerHTML = ramData.map((item, i) => `
-                <div class="package-option" onclick="selectRamBiasa(${i})">
-                    <span>${item.name}</span>
-                    <span>RM ${item.rm} / Rp ${item.idr}</span>
-                </div>
-            `).join('');
-        }
-
-        function selectRamBiasa(index) {
-            clearSelection('ramBiasaOptions');
-            document.querySelectorAll('#ramBiasaOptions .package-option')[index].classList.add('selected');
-            selectedRam = ramData[index];
-        }
-
-        function confirmPanelBiasa() {
-            if (!selectedRam) { alert('Silakan pilih RAM terlebih dahulu!'); return; }
-            closeModal('panelBiasaModal');
-            proceedToCheckout(parseInt(selectedRam.idr), `${selectedProduct.name} - ${selectedRam.name}`);
-        }
-
-        // ==================== PANEL TITLE ====================
-        function loadRamTitleOptions() {
-            const container = document.getElementById('ramTitleOptions');
-            if (!container) return;
-            container.innerHTML = ramData.map((item, i) => `
-                <div class="package-option" onclick="selectRamTitle(${i})">
-                    <span>${item.name}</span>
-                    <span>RM ${item.rm}</span>
-                </div>
-            `).join('');
-        }
-
-        function selectRamTitle(index) {
-            clearSelection('ramTitleOptions');
-            document.querySelectorAll('#ramTitleOptions .package-option')[index].classList.add('selected');
-            selectedRamTitle = ramData[index];
-            updateTotalTitle();
-        }
-
-        function loadTitleOptions() {
-            const container = document.getElementById('titleOptions');
-            if (!container) return;
-            container.innerHTML = titleData.map((item, i) => `
-                <div class="package-option" onclick="selectTitle(${i})">
-                    <span>${item.name}</span>
-                    <span>RM ${item.rm}</span>
-                </div>
-            `).join('');
-        }
-
-        function selectTitle(index) {
-            clearSelection('titleOptions');
-            document.querySelectorAll('#titleOptions .package-option')[index].classList.add('selected');
-            selectedTitleItem = titleData[index];
-            updateTotalTitle();
-        }
-
-        function updateTotalTitle() {
-            let total = 0;
-            if (selectedRamTitle) total += parseFloat(selectedRamTitle.rm);
-            if (selectedTitleItem) total += parseFloat(selectedTitleItem.rm);
-            const span = document.getElementById('totalPriceTitle');
-            if (span) span.innerHTML = `RM ${total.toFixed(2)}`;
-        }
-
-        function confirmPanelTitle() {
-            if (!selectedRamTitle) { alert('Pilih RAM dulu!'); return; }
-            if (!selectedTitleItem) { alert('Pilih Title dulu!'); return; }
-            closeModal('panelTitleModal');
-            const totalIdr = parseInt(selectedRamTitle.idr) + parseInt(selectedTitleItem.idr);
-            proceedToCheckout(totalIdr, `${selectedProduct.name} - ${selectedRamTitle.name} (${selectedTitleItem.name})`);
-        }
-
-        // ==================== MURID BUG ====================
-        function loadMuridBugOptions() {
-            const container = document.getElementById('muridBugOptions');
-            if (!container) return;
-            container.innerHTML = muridBugData.map((item, i) => `
-                <div class="package-option" onclick="selectMuridBug(${i})">
-                    <span>${item.name}</span>
-                    <span>RM ${item.rm} / Rp ${item.idr}</span>
-                </div>
-            `).join('');
-        }
-
-        function selectMuridBug(index) {
-            clearSelection('muridBugOptions');
-            document.querySelectorAll('#muridBugOptions .package-option')[index].classList.add('selected');
-            selectedItem = muridBugData[index];
-        }
-
-        function confirmMuridBug() {
-            if (!selectedItem) { alert('Pilih paket dulu!'); return; }
-            closeModal('muridBugModal');
-            proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.name}`);
-        }
-
-        // ==================== BUG MANTA ====================
-        function loadBugMantaOptions() {
-            const container = document.getElementById('bugMantaOptions');
-            if (!container) return;
-            container.innerHTML = bugMantaData.map((item, i) => `
-                <div class="package-option" onclick="selectBugManta(${i})">
-                    <span>${item.name}</span>
-                    <span>RM ${item.rm} / Rp ${item.idr}</span>
-                </div>
-            `).join('');
-        }
-
-        function selectBugManta(index) {
-            clearSelection('bugMantaOptions');
-            document.querySelectorAll('#bugMantaOptions .package-option')[index].classList.add('selected');
-            selectedItem = bugMantaData[index];
-        }
-
-        function confirmBugManta() {
-            if (!selectedItem) { alert('Pilih paket dulu!'); return; }
-            closeModal('bugMantaModal');
-            proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.name}`);
-        }
-
-        // ==================== BOT WHATSAPP ====================
-        function loadBotOptions() {
-            const container = document.getElementById('botOptions');
-            if (!container) return;
-            container.innerHTML = botData.map((item, i) => `
-                <div class="package-option" onclick="selectBot(${i})">
-                    <span>${item.name}</span>
-                    <span>RM ${item.rm} / Rp ${item.idr}</span>
-                </div>
-            `).join('');
-        }
-
-        function selectBot(index) {
-            clearSelection('botOptions');
-            document.querySelectorAll('#botOptions .package-option')[index].classList.add('selected');
-            selectedItem = botData[index];
-        }
-
-        function confirmBot() {
-            if (!selectedItem) { alert('Pilih paket bot dulu!'); return; }
-            closeModal('botModal');
-            if (selectedItem.name.includes('Custom Bot')) {
-                const fitur = prompt('Masukkan daftar fitur yang diinginkan untuk Custom Bot:');
-                proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - Custom Bot (${fitur || 'No fitur'})`);
-            } else {
-                proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.name}`);
+            if (container) {
+                container.innerHTML = ramData.map((r,i) => `<div class="package-option" onclick="selectRamBiasa(${i})"><span>${r.name}</span><span>RM ${r.rm} / Rp ${r.idr}</span></div>`).join('');
             }
         }
+        function selectRamBiasa(i) { clearSelection('ramBiasaOptions'); document.querySelectorAll('#ramBiasaOptions .package-option')[i].classList.add('selected'); selectedRam = ramData[i]; }
+        function confirmPanelBiasa() { if(!selectedRam) { alert('Pilih RAM!'); return; } closeModal('panelBiasaModal'); proceedToCheckout(parseInt(selectedRam.idr), `${selectedProduct.name} - ${selectedRam.name}`); }
 
-        // ==================== BASE APK ====================
-        function loadBaseApkOptions() {
-            const container = document.getElementById('baseApkOptions');
-            if (!container) return;
-            container.innerHTML = baseApkData.map((item, i) => `
-                <div class="package-option" onclick="selectBaseApk(${i})">
-                    <span>${item.name}</span>
-                    <span>RM ${item.rm} / Rp ${item.idr}</span>
-                </div>
-            `).join('');
-        }
+        function loadRamTitle() { let c=document.getElementById('ramTitleOptions'); if(c)c.innerHTML=ramData.map((r,i)=>`<div class="package-option" onclick="selectRamTitle(${i})"><span>${r.name}</span><span>RM ${r.rm}</span></div>`).join(''); }
+        function selectRamTitle(i){clearSelection('ramTitleOptions');document.querySelectorAll('#ramTitleOptions .package-option')[i].classList.add('selected');selectedRamTitle=ramData[i];updateTotal();}
+        function loadTitleOpt(){let c=document.getElementById('titleOptions');if(c)c.innerHTML=titleData.map((t,i)=>`<div class="package-option" onclick="selectTitle(${i})"><span>${t.name}</span><span>RM ${t.rm}</span></div>`).join('');}
+        function selectTitle(i){clearSelection('titleOptions');document.querySelectorAll('#titleOptions .package-option')[i].classList.add('selected');selectedTitleItem=titleData[i];updateTotal();}
+        function updateTotal(){let total=0;if(selectedRamTitle)total+=parseFloat(selectedRamTitle.rm);if(selectedTitleItem)total+=parseFloat(selectedTitleItem.rm);let span=document.getElementById('totalPriceTitle');if(span)span.innerHTML=`RM ${total.toFixed(2)}`;}
+        function confirmPanelTitle(){if(!selectedRamTitle||!selectedTitleItem){alert('Pilih RAM dan Title!');return;}closeModal('panelTitleModal');let total=parseInt(selectedRamTitle.idr)+parseInt(selectedTitleItem.idr);proceedToCheckout(total,`${selectedProduct.name} - ${selectedRamTitle.name} (${selectedTitleItem.name})`);}
 
-        function selectBaseApk(index) {
-            clearSelection('baseApkOptions');
-            document.querySelectorAll('#baseApkOptions .package-option')[index].classList.add('selected');
-            selectedItem = baseApkData[index];
-        }
+        function loadMuridBug(){let c=document.getElementById('muridBugOptions');if(c)c.innerHTML=muridBugData.map((m,i)=>`<div class="package-option" onclick="selectMuridBug(${i})"><span>${m.name}</span><span>RM ${m.rm} / Rp ${m.idr}</span></div>`).join('');}
+        function selectMuridBug(i){clearSelection('muridBugOptions');document.querySelectorAll('#muridBugOptions .package-option')[i].classList.add('selected');selectedItem=muridBugData[i];}
+        function confirmMuridBug(){if(!selectedItem){alert('Pilih paket!');return;}closeModal('muridBugModal');proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.name}`);}
 
-        function confirmBaseApk() {
-            if (!selectedItem) { alert('Pilih Base APK dulu!'); return; }
-            closeModal('baseApkModal');
-            proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.name}`);
-        }
+        function loadBugManta(){let c=document.getElementById('bugMantaOptions');if(c)c.innerHTML=bugMantaData.map((b,i)=>`<div class="package-option" onclick="selectBugManta(${i})"><span>${b.name}</span><span>RM ${b.rm} / Rp ${b.idr}</span></div>`).join('');}
+        function selectBugManta(i){clearSelection('bugMantaOptions');document.querySelectorAll('#bugMantaOptions .package-option')[i].classList.add('selected');selectedItem=bugMantaData[i];}
+        function confirmBugManta(){if(!selectedItem){alert('Pilih paket!');return;}closeModal('bugMantaModal');proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.name}`);}
 
-        // ==================== WEB SCRIPT WA ====================
-        function loadRankOptions() {
-            const container = document.getElementById('rankOptions');
-            if (!container) return;
-            container.innerHTML = rankData.map((rank, i) => `
-                <div class="package-option" onclick="selectRank(${i})">
-                    <span>${rank}</span>
-                    <span>Rp 5.000</span>
-                </div>
-            `).join('');
-        }
+        function loadBot(){let c=document.getElementById('botOptions');if(c)c.innerHTML=botData.map((b,i)=>`<div class="package-option" onclick="selectBot(${i})"><span>${b.name}</span><span>RM ${b.rm} / Rp ${b.idr}</span></div>`).join('');}
+        function selectBot(i){clearSelection('botOptions');document.querySelectorAll('#botOptions .package-option')[i].classList.add('selected');selectedItem=botData[i];}
+        function confirmBot(){if(!selectedItem){alert('Pilih paket bot!');return;}closeModal('botModal');if(selectedItem.name.includes('Custom Bot')){let fitur=prompt('Masukkan fitur:');proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - Custom Bot (${fitur||'No fitur'})`);}else{proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.name}`);}}
 
-        function selectRank(index) {
-            clearSelection('rankOptions');
-            document.querySelectorAll('#rankOptions .package-option')[index].classList.add('selected');
-            selectedItem = rankData[index];
-        }
+        function loadBaseApk(){let c=document.getElementById('baseApkOptions');if(c)c.innerHTML=baseApkData.map((b,i)=>`<div class="package-option" onclick="selectBaseApk(${i})"><span>${b.name}</span><span>RM ${b.rm} / Rp ${b.idr}</span></div>`).join('');}
+        function selectBaseApk(i){clearSelection('baseApkOptions');document.querySelectorAll('#baseApkOptions .package-option')[i].classList.add('selected');selectedItem=baseApkData[i];}
+        function confirmBaseApk(){if(!selectedItem){alert('Pilih Base APK!');return;}closeModal('baseApkModal');proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.name}`);}
 
-        function confirmWebScript() {
-            if (!selectedItem) { alert('Pilih rank dulu!'); return; }
-            closeModal('webScriptModal');
-            proceedToCheckout(5000, `${selectedProduct.name} - ${selectedItem}`);
-        }
+        function loadRank(){let c=document.getElementById('rankOptions');if(c)c.innerHTML=rankData.map((r,i)=>`<div class="package-option" onclick="selectRank(${i})"><span>${r}</span><span>Rp 5.000</span></div>`).join('');}
+        function selectRank(i){clearSelection('rankOptions');document.querySelectorAll('#rankOptions .package-option')[i].classList.add('selected');selectedItem=rankData[i];}
+        function confirmWebScript(){if(!selectedItem){alert('Pilih rank!');return;}closeModal('webScriptModal');proceedToCheckout(5000,`${selectedProduct.name} - ${selectedItem}`);}
 
-        // ==================== SCRIPT VIP ====================
-        function loadScriptVipOptions() {
-            const container = document.getElementById('scriptVipOptions');
-            if (!container) return;
-            container.innerHTML = scriptVipData.map((item, i) => `
-                <div class="package-option" onclick="selectScriptVip(${i})">
-                    <span>${item.name}</span>
-                    <span>RM ${item.rm} / Rp ${item.idr}</span>
-                </div>
-            `).join('');
-        }
+        function loadScriptVip(){let c=document.getElementById('scriptVipOptions');if(c)c.innerHTML=scriptVipData.map((s,i)=>`<div class="package-option" onclick="selectScriptVip(${i})"><span>${s.name}</span><span>RM ${s.rm} / Rp ${s.idr}</span></div>`).join('');}
+        function selectScriptVip(i){clearSelection('scriptVipOptions');document.querySelectorAll('#scriptVipOptions .package-option')[i].classList.add('selected');selectedItem=scriptVipData[i];}
+        function confirmScriptVip(){if(!selectedItem){alert('Pilih script!');return;}closeModal('scriptVipModal');proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.name}`);}
 
-        function selectScriptVip(index) {
-            clearSelection('scriptVipOptions');
-            document.querySelectorAll('#scriptVipOptions .package-option')[index].classList.add('selected');
-            selectedItem = scriptVipData[index];
-        }
+        function loadPromote(){let c=document.getElementById('paidPromoteOptions');if(c)c.innerHTML=promoteData.map((p,i)=>`<div class="package-option" onclick="selectPaidPromote(${i})"><span>${p.name}</span><span>${p.isCustom?'Sesuai item':`RM ${p.rm} / Rp ${p.idr}`}</span></div>`).join('');document.getElementById('customPromoteForm').style.display='none';}
+        function selectPaidPromote(i){clearSelection('paidPromoteOptions');document.querySelectorAll('#paidPromoteOptions .package-option')[i].classList.add('selected');selectedItem=promoteData[i];let form=document.getElementById('customPromoteForm');if(form)form.style.display=selectedItem.isCustom?'block':'none';}
+        function confirmPaidPromote(){if(!selectedItem){alert('Pilih paket!');return;}closeModal('paidPromoteModal');if(selectedItem.isCustom){let name=document.getElementById('itemName').value;let price=parseFloat(document.getElementById('itemPrice').value);if(!name||!price){alert('Isi nama dan harga item!');return;}proceedToCheckout(price*3500,`${selectedProduct.name} - ${selectedItem.name} (${name} - RM${price})`);}else{proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.name}`);}}
 
-        function confirmScriptVip() {
-            if (!selectedItem) { alert('Pilih script dulu!'); return; }
-            closeModal('scriptVipModal');
-            proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.name}`);
-        }
+        function loadList(){let c=document.getElementById('listMmMcOptions');if(c)c.innerHTML=listData.map((l,i)=>`<div class="package-option" onclick="selectList(${i})"><span>${l.name}</span><span>${l.isFree?'FREE':`RM ${l.rm} / Rp ${l.idr}`}</span></div>`).join('');document.getElementById('customSwapForm').style.display='none';}
+        function selectList(i){clearSelection('listMmMcOptions');document.querySelectorAll('#listMmMcOptions .package-option')[i].classList.add('selected');selectedItem=listData[i];let form=document.getElementById('customSwapForm');if(form)form.style.display=selectedItem.isSwap?'block':'none';}
+        function confirmListMmMc(){if(!selectedItem){alert('Pilih jumlah!');return;}closeModal('listMmMcModal');if(selectedItem.isSwap){let from=document.getElementById('swapFrom').value;let to=document.getElementById('swapTo').value;if(!from||!to){alert('Isi akun asal dan tujuan!');return;}proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - Swap (${from} → ${to})`);}else if(selectedItem.isFree){proceedToCheckout(0,`${selectedProduct.name} - ${selectedItem.name} (FREE)`);}else{proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.name}`);}}
 
-        // ==================== PAID PROMOTE WA ====================
-        function loadPaidPromoteOptions() {
-            const container = document.getElementById('paidPromoteOptions');
-            if (!container) return;
-            container.innerHTML = promoteData.map((item, i) => `
-                <div class="package-option" onclick="selectPaidPromote(${i})">
-                    <span>${item.name}</span>
-                    <span>${item.isCustom ? 'Sesuai item' : `RM ${item.rm} / Rp ${item.idr}`}</span>
-                </div>
-            `).join('');
-            document.getElementById('customPromoteForm').style.display = 'none';
-        }
+        function loadDmFF(){let c=document.getElementById('dmFreeFireOptions');if(c)c.innerHTML=dmFFData.map((d,i)=>`<div class="package-option" onclick="selectDmFF(${i})"><span>${d.amount}</span><span>RM ${d.rm} / Rp ${d.idr}</span></div>`).join('');}
+        function selectDmFF(i){clearSelection('dmFreeFireOptions');document.querySelectorAll('#dmFreeFireOptions .package-option')[i].classList.add('selected');selectedItem=dmFFData[i];}
+        function confirmDmFreeFire(){let id=document.getElementById('ffId').value;if(!selectedItem){alert('Pilih DM!');return;}if(!id){alert('Masukkan ID FF!');return;}closeModal('dmFreeFireModal');proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.amount} (ID: ${id})`);}
 
-        function selectPaidPromote(index) {
-            clearSelection('paidPromoteOptions');
-            document.querySelectorAll('#paidPromoteOptions .package-option')[index].classList.add('selected');
-            selectedItem = promoteData[index];
-            const form = document.getElementById('customPromoteForm');
-            if (form) form.style.display = selectedItem.isCustom ? 'block' : 'none';
-        }
+        function loadRobux(){let c=document.getElementById('robuxOptions');if(c)c.innerHTML=robuxData.map((r,i)=>`<div class="package-option" onclick="selectRobux(${i})"><span>${r.amount}</span><span>${r.isCustom?'Custom':`RM ${r.rm} / Rp ${r.idr}`}</span></div>`).join('');document.getElementById('customRobuxForm').style.display='none';}
+        function selectRobux(i){clearSelection('robuxOptions');document.querySelectorAll('#robuxOptions .package-option')[i].classList.add('selected');selectedItem=robuxData[i];let form=document.getElementById('customRobuxForm');if(form)form.style.display=selectedItem.isCustom?'block':'none';}
+        function confirmRobux(){let user=document.getElementById('robloxUser').value;if(!selectedItem){alert('Pilih Robux!');return;}if(!user){alert('Masukkan Username!');return;}closeModal('robuxModal');if(selectedItem.isCustom){let jml=document.getElementById('customRobux').value;if(!jml){alert('Masukkan jumlah!');return;}let price=Math.ceil(jml/100)*4*3500;proceedToCheckout(price,`${selectedProduct.name} - Custom ${jml} Robux (User: ${user})`);}else{proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.amount} (User: ${user})`);}}
 
-        function confirmPaidPromote() {
-            if (!selectedItem) { alert('Pilih paket promote dulu!'); return; }
-            closeModal('paidPromoteModal');
-            if (selectedItem.isCustom) {
-                const itemName = document.getElementById('itemName').value;
-                const itemPrice = parseFloat(document.getElementById('itemPrice').value);
-                if (!itemName) { alert('Masukkan nama item!'); return; }
-                if (isNaN(itemPrice) || itemPrice <= 0) { alert('Masukkan harga item yang valid!'); return; }
-                proceedToCheckout(itemPrice * 3500, `${selectedProduct.name} - ${selectedItem.name} (${itemName} - RM${itemPrice})`);
-            } else {
-                proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.name}`);
-            }
-        }
+        function loadDmMl(){let c=document.getElementById('dmMlOptions');if(c)c.innerHTML=dmMlData.map((d,i)=>`<div class="package-option" onclick="selectDmMl(${i})"><span>${d.amount}</span><span>RM ${d.rm} / Rp ${d.idr}</span></div>`).join('');}
+        function selectDmMl(i){clearSelection('dmMlOptions');document.querySelectorAll('#dmMlOptions .package-option')[i].classList.add('selected');selectedItem=dmMlData[i];}
+        function confirmDmMl(){let id=document.getElementById('mlId').value;if(!selectedItem){alert('Pilih DM!');return;}if(!id){alert('Masukkan ID ML!');return;}closeModal('dmMlModal');proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.amount} (ID: ${id})`);}
 
-        // ==================== LIST MM/MC ====================
-        function loadListOptions() {
-            const container = document.getElementById('listMmMcOptions');
-            if (!container) return;
-            container.innerHTML = listData.map((item, i) => `
-                <div class="package-option" onclick="selectList(${i})">
-                    <span>${item.name}</span>
-                    <span>${item.isFree ? 'FREE' : `RM ${item.rm} / Rp ${item.idr}`}</span>
-                </div>
-            `).join('');
-            document.getElementById('customSwapForm').style.display = 'none';
-        }
+        function loadBoostLike(){let c=document.getElementById('boostLikeOptions');if(c)c.innerHTML=boostLikeData.map((b,i)=>`<div class="package-option" onclick="selectBoostLike(${i})"><span>${b.amount}</span><span>RM ${b.rm} / Rp ${b.idr}</span></div>`).join('');}
+        function selectBoostLike(i){clearSelection('boostLikeOptions');document.querySelectorAll('#boostLikeOptions .package-option')[i].classList.add('selected');selectedItem=boostLikeData[i];}
+        function confirmBoostLike(){if(!selectedItem){alert('Pilih paket!');return;}closeModal('boostLikeTikTokModal');proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.amount}`);}
 
-        function selectList(index) {
-            clearSelection('listMmMcOptions');
-            document.querySelectorAll('#listMmMcOptions .package-option')[index].classList.add('selected');
-            selectedItem = listData[index];
-            const form = document.getElementById('customSwapForm');
-            if (form) form.style.display = selectedItem.isSwap ? 'block' : 'none';
-        }
+        function loadBoostFollowers(){let c=document.getElementById('boostFollowersOptions');if(c)c.innerHTML=boostFollowersData.map((b,i)=>`<div class="package-option" onclick="selectBoostFollowers(${i})"><span>${b.amount}</span><span>RM ${b.rm} / Rp ${b.idr}</span></div>`).join('');}
+        function selectBoostFollowers(i){clearSelection('boostFollowersOptions');document.querySelectorAll('#boostFollowersOptions .package-option')[i].classList.add('selected');selectedItem=boostFollowersData[i];}
+        function confirmBoostFollowers(){if(!selectedItem){alert('Pilih paket!');return;}closeModal('boostFollowersTikTokModal');proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.amount}`);}
 
-        function confirmListMmMc() {
-            if (!selectedItem) { alert('Pilih jumlah list dulu!'); return; }
-            closeModal('listMmMcModal');
-            if (selectedItem.isSwap) {
-                const from = document.getElementById('swapFrom').value;
-                const to = document.getElementById('swapTo').value;
-                if (!from || !to) { alert('Masukkan akun asal dan tujuan!'); return; }
-                proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - Swap (${from} → ${to})`);
-            } else if (selectedItem.isFree) {
-                proceedToCheckout(0, `${selectedProduct.name} - ${selectedItem.name} (FREE)`);
-            } else {
-                proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.name}`);
-            }
-        }
+        function loadBoostView(){let c=document.getElementById('boostViewOptions');if(c)c.innerHTML=boostViewData.map((b,i)=>`<div class="package-option" onclick="selectBoostView(${i})"><span>${b.amount}</span><span>RM ${b.rm} / Rp ${b.idr}</span></div>`).join('');}
+        function selectBoostView(i){clearSelection('boostViewOptions');document.querySelectorAll('#boostViewOptions .package-option')[i].classList.add('selected');selectedItem=boostViewData[i];}
+        function confirmBoostView(){if(!selectedItem){alert('Pilih paket!');return;}closeModal('boostViewTikTokModal');proceedToCheckout(parseInt(selectedItem.idr),`${selectedProduct.name} - ${selectedItem.amount}`);}
 
-        // ==================== DM FREE FIRE ====================
-        function loadDmFFOptions() {
-            const container = document.getElementById('dmFreeFireOptions');
-            if (!container) return;
-            container.innerHTML = dmFFData.map((item, i) => `
-                <div class="package-option" onclick="selectDmFF(${i})">
-                    <span>${item.amount}</span>
-                    <span>RM ${item.rm} / Rp ${item.idr}</span>
-                </div>
-            `).join('');
-        }
-
-        function selectDmFF(index) {
-            clearSelection('dmFreeFireOptions');
-            document.querySelectorAll('#dmFreeFireOptions .package-option')[index].classList.add('selected');
-            selectedItem = dmFFData[index];
-        }
-
-        function confirmDmFreeFire() {
-            const ffId = document.getElementById('ffId').value;
-            if (!selectedItem) { alert('Pilih jumlah DM dulu!'); return; }
-            if (!ffId) { alert('Masukkan ID Free Fire!'); return; }
-            closeModal('dmFreeFireModal');
-            proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.amount} (ID: ${ffId})`);
-        }
-
-        // ==================== ROBUX ====================
-        function loadRobuxOptions() {
-            const container = document.getElementById('robuxOptions');
-            if (!container) return;
-            container.innerHTML = robuxData.map((item, i) => `
-                <div class="package-option" onclick="selectRobux(${i})">
-                    <span>${item.amount}</span>
-                    <span>${item.isCustom ? 'Custom' : `RM ${item.rm} / Rp ${item.idr}`}</span>
-                </div>
-            `).join('');
-            document.getElementById('customRobuxForm').style.display = 'none';
-        }
-
-        function selectRobux(index) {
-            clearSelection('robuxOptions');
-            document.querySelectorAll('#robuxOptions .package-option')[index].classList.add('selected');
-            selectedItem = robuxData[index];
-            const form = document.getElementById('customRobuxForm');
-            if (form) form.style.display = selectedItem.isCustom ? 'block' : 'none';
-        }
-
-        function confirmRobux() {
-            const username = document.getElementById('robloxUser').value;
-            if (!selectedItem) { alert('Pilih jumlah Robux dulu!'); return; }
-            if (!username) { alert('Masukkan Username Roblox!'); return; }
-            closeModal('robuxModal');
-            if (selectedItem.isCustom) {
-                const customAmount = document.getElementById('customRobux').value;
-                if (!customAmount) { alert('Masukkan jumlah Robux!'); return; }
-                const price = Math.ceil(customAmount / 100) * 4 * 3500;
-                proceedToCheckout(price, `${selectedProduct.name} - Custom ${customAmount} Robux (User: ${username})`);
-            } else {
-                proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.amount} (User: ${username})`);
-            }
-        }
-
-        // ==================== DM ML ====================
-        function loadDmMlOptions() {
-            const container = document.getElementById('dmMlOptions');
-            if (!container) return;
-            container.innerHTML = dmMlData.map((item, i) => `
-                <div class="package-option" onclick="selectDmMl(${i})">
-                    <span>${item.amount}</span>
-                    <span>RM ${item.rm} / Rp ${item.idr}</span>
-                </div>
-            `).join('');
-        }
-
-        function selectDmMl(index) {
-            clearSelection('dmMlOptions');
-            document.querySelectorAll('#dmMlOptions .package-option')[index].classList.add('selected');
-            selectedItem = dmMlData[index];
-        }
-
-        function confirmDmMl() {
-            const mlId = document.getElementById('mlId').value;
-            if (!selectedItem) { alert('Pilih jumlah DM dulu!'); return; }
-            if (!mlId) { alert('Masukkan ID Mobile Legends!'); return; }
-            closeModal('dmMlModal');
-            proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.amount} (ID: ${mlId})`);
-        }
-
-        // ==================== BOOST TIKTOK ====================
-        function loadBoostLikeOptions() {
-            const container = document.getElementById('boostLikeOptions');
-            if (!container) return;
-            container.innerHTML = boostLikeData.map((item, i) => `
-                <div class="package-option" onclick="selectBoostLike(${i})">
-                    <span>${item.amount}</span>
-                    <span>RM ${item.rm} / Rp ${item.idr}</span>
-                </div>
-            `).join('');
-        }
-
-        function selectBoostLike(index) {
-            clearSelection('boostLikeOptions');
-            document.querySelectorAll('#boostLikeOptions .package-option')[index].classList.add('selected');
-            selectedItem = boostLikeData[index];
-        }
-
-        function confirmBoostLike() {
-            if (!selectedItem) { alert('Pilih paket boost like dulu!'); return; }
-            closeModal('boostLikeTikTokModal');
-            proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.amount}`);
-        }
-
-        function loadBoostFollowersOptions() {
-            const container = document.getElementById('boostFollowersOptions');
-            if (!container) return;
-            container.innerHTML = boostFollowersData.map((item, i) => `
-                <div class="package-option" onclick="selectBoostFollowers(${i})">
-                    <span>${item.amount}</span>
-                    <span>RM ${item.rm} / Rp ${item.idr}</span>
-                </div>
-            `).join('');
-        }
-
-        function selectBoostFollowers(index) {
-            clearSelection('boostFollowersOptions');
-            document.querySelectorAll('#boostFollowersOptions .package-option')[index].classList.add('selected');
-            selectedItem = boostFollowersData[index];
-        }
-
-        function confirmBoostFollowers() {
-            if (!selectedItem) { alert('Pilih paket boost followers dulu!'); return; }
-            closeModal('boostFollowersTikTokModal');
-            proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.amount}`);
-        }
-
-        function loadBoostViewOptions() {
-            const container = document.getElementById('boostViewOptions');
-            if (!container) return;
-            container.innerHTML = boostViewData.map((item, i) => `
-                <div class="package-option" onclick="selectBoostView(${i})">
-                    <span>${item.amount}</span>
-                    <span>RM ${item.rm} / Rp ${item.idr}</span>
-                </div>
-            `).join('');
-        }
-
-        function selectBoostView(index) {
-            clearSelection('boostViewOptions');
-            document.querySelectorAll('#boostViewOptions .package-option')[index].classList.add('selected');
-            selectedItem = boostViewData[index];
-        }
-
-        function confirmBoostView() {
-            if (!selectedItem) { alert('Pilih paket boost view dulu!'); return; }
-            closeModal('boostViewTikTokModal');
-            proceedToCheckout(parseInt(selectedItem.idr), `${selectedProduct.name} - ${selectedItem.amount}`);
-        }
-
-        // ==================== HELPER ====================
-        function clearSelection(containerId) {
-            const opts = document.querySelectorAll(`#${containerId} .package-option`);
-            opts.forEach(opt => opt.classList.remove('selected'));
-        }
-
+        function clearSelection(containerId) { document.querySelectorAll(`#${containerId} .package-option`).forEach(opt => opt.classList.remove('selected')); }
+        
         function closeModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) modal.classList.remove('active');
             selectedItem = null;
             selectedRam = null;
-            selectedTitle = null;
             selectedRamTitle = null;
             selectedTitleItem = null;
         }
 
         function proceedToCheckout(price, productName) {
             const user = checkAuth();
+            if (!user) return;
+            
             const pendingOrder = {
                 orderId: 'ORD' + Date.now() + Math.floor(Math.random() * 1000),
-                productId: selectedProduct.id,
+                productId: selectedProduct ? selectedProduct.id : 0,
                 productName: productName,
                 price: price,
                 customerName: user.name,
@@ -959,13 +349,14 @@
                 date: new Date().toLocaleString('id-ID'),
                 timestamp: Date.now()
             };
+            
             localStorage.setItem('pendingOrder', JSON.stringify(pendingOrder));
             window.location.href = 'checkout.html';
         }
 
-        // INITIALIZE
+        // INIT
         checkAuth();
         renderProducts();
     </script>
 </body>
-</html>
+                                                                                                                                                                                                                                                                                                                        </html>
