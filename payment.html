@@ -28,7 +28,6 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -130,9 +129,11 @@
             transition: 0.3s;
         }
 
-        .method-card:hover, .method-card.selected {
+        .method-card:hover,
+        .method-card.selected {
             border-color: #00d2ff;
             background: linear-gradient(135deg, #00d2ff10, #3a7bd510);
+            transform: translateY(-3px);
         }
 
         .method-icon {
@@ -160,20 +161,22 @@
             display: block;
         }
 
-        .qris-container, .duitnow-container {
+        .qris-container,
+        .duitnow-container {
             text-align: center;
             background: #f8fafc;
             border-radius: 24px;
             padding: 1.5rem;
         }
 
-        .qris-container h3, .duitnow-container h3 {
+        .qris-container h3,
+        .duitnow-container h3 {
             color: #1a1a2e;
             margin-bottom: 1rem;
         }
 
         .payment-image {
-            max-width: 250px;
+            max-width: 280px;
             width: 100%;
             margin: 1rem auto;
             display: block;
@@ -211,12 +214,28 @@
             cursor: pointer;
             width: 100%;
             margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
         }
 
         .timer {
             color: #eab308;
             font-weight: 600;
             margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -233,8 +252,8 @@
 
     <div class="main-container">
         <div class="payment-card">
-            <h2><i class="fas fa-qrcode"></i> Payment Method</h2>
-            <p>Choose your payment method</p>
+            <h2><i class="fas fa-qrcode"></i> Metode Pembayaran</h2>
+            <p>Pilih metode pembayaran Anda</p>
 
             <div id="orderSummary" class="order-summary"></div>
 
@@ -254,20 +273,20 @@
             <div id="qrisDetail" class="payment-detail">
                 <div class="qris-container">
                     <h3>Scan QRIS - All Payment</h3>
-                    <img id="qrisImage" class="payment-image" src="" alt="QRIS Code">
+                    <img id="qrisImage" class="payment-image" src="/assets/qris-muzzshop.jpg" alt="QRIS Code">
                     <div class="supported-apps" id="qrisApps"></div>
-                    <div class="timer" id="qrisTimer">Time remaining: 30:00</div>
-                    <button class="btn-confirm" onclick="confirmQRISPayment()">I Have Paid</button>
+                    <div class="timer" id="qrisTimer">⏳ Sisa waktu: 30:00</div>
+                    <button class="btn-confirm" onclick="confirmQRISPayment()">✅ Saya Sudah Bayar</button>
                 </div>
             </div>
 
             <div id="duitnowDetail" class="payment-detail">
                 <div class="duitnow-container">
                     <h3>Scan DuitNow QR</h3>
-                    <img id="duitnowImage" class="payment-image" src="" alt="DuitNow QR Code">
+                    <img id="duitnowImage" class="payment-image" src="/assets/duitnow-muzzshop.jpg" alt="DuitNow QR Code">
                     <div class="supported-apps" id="duitnowApps"></div>
-                    <div class="timer" id="duitnowTimer">Time remaining: 30:00</div>
-                    <button class="btn-confirm" onclick="confirmDuitNowPayment()">I Have Paid</button>
+                    <div class="timer" id="duitnowTimer">⏳ Sisa waktu: 30:00</div>
+                    <button class="btn-confirm" onclick="confirmDuitNowPayment()">✅ Saya Sudah Bayar</button>
                 </div>
             </div>
         </div>
@@ -298,8 +317,8 @@
             
             const summaryDiv = document.getElementById('orderSummary');
             summaryDiv.innerHTML = `
-                <p><strong>Order ID:</strong> ${pendingOrder.orderId}</p>
-                <p><strong>Product:</strong> ${pendingOrder.productName}</p>
+                <p><strong>ID Pesanan:</strong> ${pendingOrder.orderId}</p>
+                <p><strong>Produk:</strong> ${pendingOrder.productName}</p>
                 <p><strong>Total:</strong> <span style="color:#00d2ff; font-weight:700;">Rp ${pendingOrder.price.toLocaleString()}</span></p>
             `;
             
@@ -309,16 +328,25 @@
             document.getElementById('qrisApps').innerHTML = qrisApps.map(app => `<span>${app}</span>`).join('');
             document.getElementById('duitnowApps').innerHTML = duitnowApps.map(app => `<span>${app}</span>`).join('');
             
+            // Set gambar QRIS dari folder assets
             const qrisImage = document.getElementById('qrisImage');
-            qrisImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=QRIS-MUZZ-${pendingOrder.orderId}-${pendingOrder.price}`;
+            qrisImage.src = '/assets/qris-muzzshop.jpg';
+            qrisImage.onerror = function() {
+                this.src = 'https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=QRIS-MUZZSHOP-PAYMENT';
+            };
             
+            // Set gambar DuitNow dari folder assets
             const duitnowImage = document.getElementById('duitnowImage');
-            duitnowImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=DUITNOW-MUZZ-${pendingOrder.orderId}-${pendingOrder.price}`;
+            duitnowImage.src = '/assets/duitnow-muzzshop.jpg';
+            duitnowImage.onerror = function() {
+                this.src = 'https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=DUITNOW-MUZZSHOP-PAYMENT';
+            };
         }
 
         function selectMethod(method) {
             document.querySelectorAll('.method-card').forEach(card => card.classList.remove('selected'));
             document.getElementById(method + 'Card').classList.add('selected');
+            
             document.querySelectorAll('.payment-detail').forEach(detail => detail.classList.remove('active'));
             document.getElementById(method + 'Detail').classList.add('active');
             
@@ -333,7 +361,7 @@
             timerInterval = setInterval(() => {
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
-                timerElement.innerHTML = `Time remaining: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                timerElement.innerHTML = `⏳ Sisa waktu: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 timeLeft--;
                 if (timeLeft < 0) clearInterval(timerInterval);
             }, 1000);
@@ -351,6 +379,7 @@
             const pendingOrder = JSON.parse(localStorage.getItem('pendingOrder'));
             if (!pendingOrder) return;
             
+            // Simpan ke riwayat pesanan
             const orders = JSON.parse(localStorage.getItem('orders') || '[]');
             const existingIndex = orders.findIndex(o => o.orderId === pendingOrder.orderId);
             
@@ -368,6 +397,7 @@
             }
             localStorage.setItem('orders', JSON.stringify(orders));
             
+            // Buat pesan WhatsApp
             const message = `Hai owner, saya habis membeli ${pendingOrder.productName} saya ingin mengambil benda ini, ini biodata saya
 
 ID Pesanan : ${pendingOrder.orderId}
@@ -385,7 +415,7 @@ Note :
             const ownerNumber = '60175632450';
             const waLink = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(message)}`;
             
-            alert('Payment confirmed! You will be redirected to WhatsApp.');
+            alert('✅ Pembayaran berhasil dikonfirmasi! Anda akan diarahkan ke WhatsApp.');
             window.open(waLink, '_blank');
             
             localStorage.removeItem('pendingOrder');
