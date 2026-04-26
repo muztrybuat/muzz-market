@@ -2,113 +2,313 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders - Muzz Shop</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Orders - Muzz Shop | Riwayat Pesanan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
+        /* ================================================================================== */
+        /* MUZZ SHOP - ORDERS PAGE - FULL STYLESHEET                                       */
+        /* VERSION 3.0.0 - ULTIMATE EDITION                                                */
+        /* ================================================================================== */
+        
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
         }
 
         body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #0a0a1a 0%, #1a1a3a 50%, #0d0d2b 100%);
             min-height: 100vh;
+            line-height: 1.5;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            position: relative;
         }
 
+        /* ----------------------------------------------
+           CUSTOM SCROLLBAR PREMIUM
+        ---------------------------------------------- */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(145deg, #00d2ff, #a855f7, #7c3aed);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(145deg, #00b4d8, #9b30ff, #6d28d9);
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: #1a1a2e;
+        }
+
+        /* ----------------------------------------------
+           SELECTION STYLE
+        ---------------------------------------------- */
+        ::selection {
+            background: linear-gradient(145deg, #00d2ff, #a855f7);
+            color: white;
+        }
+
+        ::-moz-selection {
+            background: linear-gradient(145deg, #00d2ff, #a855f7);
+            color: white;
+        }
+
+        /* ----------------------------------------------
+           ANIMATIONS KEYFRAMES
+        ---------------------------------------------- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatSlow {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+            }
+            25% {
+                transform: translateY(-30px) translateX(20px);
+            }
+            50% {
+                transform: translateY(20px) translateX(-20px);
+            }
+            75% {
+                transform: translateY(-10px) translateX(10px);
+            }
+        }
+
+        /* ----------------------------------------------
+           ANIMATED BACKGROUND PARTICLES
+        ---------------------------------------------- */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-animation div {
+            position: absolute;
+            display: block;
+            background: linear-gradient(145deg, rgba(0, 210, 255, 0.08), rgba(168, 85, 247, 0.08));
+            border-radius: 50%;
+            animation: floatSlow 25s infinite ease-in-out;
+        }
+
+        .bg-animation div:nth-child(1) { top: 10%; left: 10%; width: 120px; height: 120px; animation-duration: 20s; }
+        .bg-animation div:nth-child(2) { top: 70%; left: 80%; width: 180px; height: 180px; animation-duration: 25s; animation-delay: 2s; }
+        .bg-animation div:nth-child(3) { top: 40%; left: 85%; width: 80px; height: 80px; animation-duration: 18s; animation-delay: 4s; }
+        .bg-animation div:nth-child(4) { top: 80%; left: 20%; width: 150px; height: 150px; animation-duration: 22s; animation-delay: 1s; }
+        .bg-animation div:nth-child(5) { top: 20%; left: 60%; width: 100px; height: 100px; animation-duration: 28s; animation-delay: 3s; }
+
+        /* ----------------------------------------------
+           NAVBAR PREMIUM
+        ---------------------------------------------- */
         .navbar {
-            background: rgba(15, 25, 45, 0.95);
-            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 20, 35, 0.98);
+            backdrop-filter: blur(25px);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(0, 210, 255, 0.25);
+            transition: all 0.3s ease;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #00d2ff, #a855f7);
+            font-size: 1.7rem;
+            font-weight: 900;
+            background: linear-gradient(145deg, #00d2ff, #a855f7, #7c3aed, #6366f1);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -0.5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo i {
+            background: none;
+            color: #00d2ff;
+            margin-right: 5px;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.3));
         }
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             align-items: center;
             flex-wrap: wrap;
         }
 
         .nav-link {
             text-decoration: none;
-            color: #a0b3d9;
-            font-weight: 500;
+            color: #cbd5e1;
+            font-weight: 600;
             padding: 8px 20px;
-            border-radius: 40px;
-            transition: all 0.3s;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
         }
 
-        .nav-link:hover, .nav-link.active {
-            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(145deg, #00d2ff, #a855f7);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            width: 70%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: linear-gradient(145deg, #00d2ff15, #a855f715);
             color: white;
         }
 
         .btn-logout {
-            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            background: linear-gradient(145deg, #f43f5e, #e11d48);
             color: white;
             border: none;
-            padding: 8px 22px;
-            border-radius: 40px;
+            padding: 8px 24px;
+            border-radius: 50px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(244, 63, 94, 0.3);
         }
 
+        .btn-logout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(244, 63, 94, 0.5);
+        }
+
+        /* ----------------------------------------------
+           MAIN CONTAINER
+        ---------------------------------------------- */
         .main-container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 110px 24px 50px;
+            position: relative;
+            z-index: 1;
         }
 
+        /* ----------------------------------------------
+           SECTION TITLE
+        ---------------------------------------------- */
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1.5rem;
             color: white;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(0, 210, 255, 0.3);
+            animation: fadeInDown 0.6s ease;
         }
 
+        .section-title i {
+            color: #00d2ff;
+        }
+
+        /* ----------------------------------------------
+           ORDERS LIST
+        ---------------------------------------------- */
         .orders-list {
-            background: white;
-            border-radius: 28px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 32px;
+            padding: 1.8rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            animation: fadeInUp 0.6s ease;
         }
 
         .order-item {
             background: #f8fafc;
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 1.2rem;
             margin-bottom: 1rem;
             border-left: 4px solid #00d2ff;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .order-item:hover {
-            background: #edf2f7;
-            transform: translateX(5px);
+            transform: translateX(8px);
+            background: #f1f5f9;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
         .order-header {
@@ -121,15 +321,15 @@
 
         .order-product {
             font-size: 1.1rem;
-            font-weight: 700;
-            color: #1a1a2e;
+            font-weight: 800;
+            color: #1e293b;
         }
 
         .order-status {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
         }
 
         .status-paid {
@@ -151,7 +351,10 @@
 
         .order-detail-item {
             font-size: 0.8rem;
-            color: #4a4a6a;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .order-detail-item i {
@@ -159,6 +362,38 @@
             color: #00d2ff;
         }
 
+        /* ----------------------------------------------
+           FILTER SECTION
+        ---------------------------------------------- */
+        .filter-section {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-btn-order {
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            color: #1e293b;
+            font-size: 0.85rem;
+        }
+
+        .filter-btn-order:hover,
+        .filter-btn-order.active {
+            background: linear-gradient(145deg, #00d2ff, #3a7bd5);
+            color: white;
+        }
+
+        /* ----------------------------------------------
+           EMPTY STATE
+        ---------------------------------------------- */
         .empty-orders {
             text-align: center;
             padding: 3rem;
@@ -166,21 +401,40 @@
         }
 
         .empty-orders i {
-            font-size: 3rem;
+            font-size: 4rem;
             margin-bottom: 1rem;
             display: block;
+            color: #cbd5e1;
         }
 
         .empty-orders a {
             color: #00d2ff;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 1rem;
         }
 
+        /* ----------------------------------------------
+           RESPONSIVE DESIGN
+        ---------------------------------------------- */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
                 text-align: center;
+                padding: 1rem;
+            }
+            .nav-links {
+                justify-content: center;
+            }
+            .main-container {
+                padding: 130px 16px 40px;
+            }
+            .section-title {
+                font-size: 1.4rem;
+            }
+            .orders-list {
+                padding: 1rem;
             }
             .order-header {
                 flex-direction: column;
@@ -191,18 +445,34 @@
                 flex-direction: column;
                 gap: 0.5rem;
             }
+            .filter-section {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.2rem;
+            }
+            .order-product {
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="bg-animation">
+        <div></div><div></div><div></div><div></div><div></div>
+    </div>
+
     <nav class="navbar">
         <div class="logo"><i class="fas fa-bolt"></i> Muzz Shop</div>
         <div class="nav-links">
-            <a href="dashboard.html" class="nav-link">Dashboard</a>
-            <a href="products.html" class="nav-link">Products</a>
-            <a href="contact.html" class="nav-link">Contact</a>
-            <a href="profile.html" class="nav-link">Profile</a>
-            <button class="btn-logout" onclick="logout()">Logout</button>
+            <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+            <a href="products.html" class="nav-link">🛍️ Products</a>
+            <a href="contact.html" class="nav-link">📞 Contact</a>
+            <a href="profile.html" class="nav-link">👤 Profile</a>
+            <button class="btn-logout" onclick="logout()">🚪 Logout</button>
         </div>
     </nav>
 
@@ -211,21 +481,45 @@
             <i class="fas fa-history"></i>
             <span>Riwayat Pesanan</span>
         </div>
+
+        <div class="filter-section">
+            <button class="filter-btn-order active" onclick="filterOrders('all')">Semua</button>
+            <button class="filter-btn-order" onclick="filterOrders('paid')">✅ Lunas</button>
+            <button class="filter-btn-order" onclick="filterOrders('pending')">⏳ Menunggu</button>
+        </div>
+
         <div id="ordersHistoryList" class="orders-list"></div>
     </div>
 
     <script>
+        let currentFilter = 'all';
+
         function checkAuth() {
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
             if (!currentUser) {
                 window.location.href = 'login.html';
+                return null;
             }
             return currentUser;
         }
 
         function logout() {
             localStorage.removeItem('currentUser');
+            localStorage.removeItem('pendingOrder');
             window.location.href = 'index.html';
+        }
+
+        function filterOrders(status) {
+            currentFilter = status;
+            document.querySelectorAll('.filter-btn-order').forEach(btn => {
+                btn.classList.remove('active');
+                if ((status === 'all' && btn.textContent === 'Semua') ||
+                    (status === 'paid' && btn.textContent === '✅ Lunas') ||
+                    (status === 'pending' && btn.textContent === '⏳ Menunggu')) {
+                    btn.classList.add('active');
+                }
+            });
+            loadOrdersHistory();
         }
 
         function loadOrdersHistory() {
@@ -233,35 +527,47 @@
             if (!user) return;
             
             const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-            const userOrders = orders.filter(o => o.customerEmail === user.email);
+            let userOrders = orders.filter(o => o.customerEmail === user.email);
+            
+            if (currentFilter !== 'all') {
+                userOrders = userOrders.filter(o => o.status === currentFilter);
+            }
             
             const container = document.getElementById('ordersHistoryList');
             
             if (userOrders.length === 0) {
+                let message = currentFilter === 'all' ? 'Belum ada pesanan' : 
+                             (currentFilter === 'paid' ? 'Belum ada pesanan yang lunas' : 'Tidak ada pesanan yang menunggu');
                 container.innerHTML = `
                     <div class="empty-orders">
                         <i class="fas fa-inbox"></i>
-                        <p>Belum ada pesanan</p>
-                        <a href="products.html">Mulai Belanja Sekarang →</a>
+                        <p>${message}</p>
+                        <a href="products.html">🛍️ Mulai Belanja Sekarang →</a>
                     </div>
                 `;
-            } else {
-                container.innerHTML = userOrders.reverse().map(order => `
-                    <div class="order-item">
-                        <div class="order-header">
-                            <span class="order-product">${order.productName}</span>
-                            <span class="order-status ${order.status === 'paid' ? 'status-paid' : 'status-pending'}">
-                                ${order.status === 'paid' ? '✅ Lunas' : '⏳ Menunggu Pembayaran'}
-                            </span>
-                        </div>
-                        <div class="order-details">
-                            <div class="order-detail-item"><i class="fas fa-hashtag"></i> ID: ${order.orderId}</div>
-                            <div class="order-detail-item"><i class="far fa-calendar-alt"></i> ${order.date}</div>
-                            <div class="order-detail-item"><i class="fas fa-money-bill-wave"></i> Rp ${order.price.toLocaleString()}</div>
-                        </div>
-                    </div>
-                `).join('');
+                return;
             }
+            
+            container.innerHTML = userOrders.reverse().map(order => `
+                <div class="order-item" onclick="viewOrderDetail('${order.orderId}')">
+                    <div class="order-header">
+                        <span class="order-product">${order.productName}</span>
+                        <span class="order-status ${order.status === 'paid' ? 'status-paid' : 'status-pending'}">
+                            ${order.status === 'paid' ? '✅ Lunas' : '⏳ Menunggu Pembayaran'}
+                        </span>
+                    </div>
+                    <div class="order-details">
+                        <div class="order-detail-item"><i class="fas fa-hashtag"></i> ID: ${order.orderId}</div>
+                        <div class="order-detail-item"><i class="far fa-calendar-alt"></i> ${order.date}</div>
+                        <div class="order-detail-item"><i class="fas fa-money-bill-wave"></i> Rp ${order.price.toLocaleString()}</div>
+                        ${order.paymentMethod ? `<div class="order-detail-item"><i class="fas fa-credit-card"></i> ${order.paymentMethod}</div>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function viewOrderDetail(orderId) {
+            alert(`Detail pesanan: ${orderId}\nFitur detail akan segera hadir.`);
         }
 
         loadOrdersHistory();
