@@ -54,10 +54,7 @@
     <script>
         function checkAuth() {
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            if (!currentUser) {
-                window.location.href = 'login.html';
-                return null;
-            }
+            if (!currentUser) window.location.href = 'login.html';
             return currentUser;
         }
 
@@ -68,8 +65,6 @@
 
         function loadCheckout() {
             const user = checkAuth();
-            if (!user) return;
-            
             const pendingOrder = JSON.parse(localStorage.getItem('pendingOrder'));
             
             if (!pendingOrder) {
@@ -77,26 +72,22 @@
                 return;
             }
             
-            const container = document.getElementById('checkoutContent');
-            container.innerHTML = `
+            document.getElementById('checkoutContent').innerHTML = `
                 <div class="order-summary">
-                    <h3>Order Details</h3>
-                    <div class="order-detail"><span>Order ID</span><strong>${pendingOrder.orderId}</strong></div>
-                    <div class="order-detail"><span>Product</span><strong>${pendingOrder.productName}</strong></div>
-                    <div class="order-detail"><span>Total Price</span><strong class="price-total">Rp ${pendingOrder.price.toLocaleString()}</strong></div>
+                    <h3>📋 Detail Pesanan</h3>
+                    <div class="order-detail"><span>ID Pesanan</span><strong>${pendingOrder.orderId}</strong></div>
+                    <div class="order-detail"><span>Produk</span><strong>${pendingOrder.productName}</strong></div>
+                    <div class="order-detail"><span>Total Harga</span><strong class="price-total">Rp ${pendingOrder.price.toLocaleString()}</strong></div>
                 </div>
                 <div class="order-summary">
-                    <h3>Customer Information</h3>
-                    <div class="order-detail"><span>Name</span><strong>${pendingOrder.customerName}</strong></div>
+                    <h3>👤 Informasi Pembeli</h3>
+                    <div class="order-detail"><span>Nama</span><strong>${pendingOrder.customerName}</strong></div>
                     <div class="order-detail"><span>Email</span><strong>${pendingOrder.customerEmail}</strong></div>
+                    <div class="order-detail"><span>WhatsApp</span><strong>${pendingOrder.customerPhone}</strong></div>
                 </div>
-                <button class="btn" onclick="processPayment()">Proceed to Payment →</button>
-                <a href="products.html" class="back-link">← Back to Products</a>
+                <button class="btn" onclick="window.location.href='payment.html'">Lanjut ke Pembayaran →</button>
+                <a href="products.html" class="back-link">← Kembali ke Produk</a>
             `;
-        }
-        
-        function processPayment() {
-            window.location.href = 'payment.html';
         }
         
         loadCheckout();
