@@ -2,312 +2,44 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Checkout - Muzz Shop | Konfirmasi Pesanan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Muzz Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(145deg, #0a0a1a 0%, #1a1a3a 50%, #0d0d2b 100%);
-            min-height: 100vh;
-            position: relative;
-        }
-
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .bg-animation div {
-            position: absolute;
-            display: block;
-            background: linear-gradient(145deg, rgba(0, 210, 255, 0.06), rgba(168, 85, 247, 0.06));
-            border-radius: 50%;
-            animation: floatSlow 25s infinite ease-in-out;
-        }
-
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0px) translateX(0px); }
-            25% { transform: translateY(-30px) translateX(20px); }
-            50% { transform: translateY(20px) translateX(-20px); }
-            75% { transform: translateY(-10px) translateX(10px); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .bg-animation div:nth-child(1) { top: 10%; left: 10%; width: 120px; height: 120px; animation-duration: 20s; }
-        .bg-animation div:nth-child(2) { top: 70%; left: 80%; width: 180px; height: 180px; animation-duration: 25s; animation-delay: 2s; }
-        .bg-animation div:nth-child(3) { top: 40%; left: 85%; width: 80px; height: 80px; animation-duration: 18s; animation-delay: 4s; }
-        .bg-animation div:nth-child(4) { top: 80%; left: 20%; width: 150px; height: 150px; animation-duration: 22s; animation-delay: 1s; }
-        .bg-animation div:nth-child(5) { top: 20%; left: 60%; width: 100px; height: 100px; animation-duration: 28s; animation-delay: 3s; }
-
-        /* Navbar */
-        .navbar {
-            background: rgba(10, 20, 35, 0.98);
-            backdrop-filter: blur(25px);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(0, 210, 255, 0.25);
-        }
-
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 900;
-            background: linear-gradient(145deg, #00d2ff, #a855f7, #7c3aed);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .logo i {
-            background: none;
-            color: #00d2ff;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #cbd5e1;
-            font-weight: 600;
-            padding: 8px 20px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background: linear-gradient(145deg, #00d2ff15, #a855f715);
-            color: white;
-        }
-
-        .btn-logout {
-            background: linear-gradient(145deg, #f43f5e, #e11d48);
-            color: white;
-            border: none;
-            padding: 8px 24px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 700;
-        }
-
-        /* Main Container */
-        .main-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Checkout Card */
-        .checkout-card {
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 48px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.5s ease;
-            border: 1px solid rgba(0, 210, 255, 0.2);
-        }
-
-        .checkout-card h2 {
-            text-align: center;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
-            font-size: 1.8rem;
-        }
-
-        .checkout-card > p {
-            text-align: center;
-            color: #64748b;
-            margin-bottom: 2rem;
-        }
-
-        /* Order Summary */
-        .order-summary {
-            background: #f8fafc;
-            border-radius: 24px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .order-summary h3 {
-            color: #1e293b;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .order-detail {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .order-detail:last-child {
-            border-bottom: none;
-        }
-
-        .order-detail span {
-            color: #64748b;
-        }
-
-        .order-detail strong {
-            color: #1e293b;
-        }
-
-        .price-total {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: #00d2ff;
-        }
-
-        /* Payment Methods Preview */
-        .payment-preview {
-            background: #f8fafc;
-            border-radius: 24px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .payment-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: white;
-            border-radius: 40px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .payment-badge i {
-            color: #00d2ff;
-        }
-
-        /* Button */
-        .btn {
-            width: 100%;
-            background: linear-gradient(145deg, #00d2ff, #3a7bd5);
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 210, 255, 0.4);
-        }
-
-        /* Back Link */
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 1.2rem;
-            color: #00d2ff;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        /* Coupon Section */
-        .coupon-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .coupon-input {
-            display: flex;
-            gap: 10px;
-        }
-
-        .coupon-input input {
-            flex: 1;
-            padding: 12px 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: 50px;
-            font-size: 0.9rem;
-        }
-
-        .coupon-input input:focus {
-            outline: none;
-            border-color: #00d2ff;
-        }
-
-        .coupon-input button {
-            padding: 12px 20px;
-            background: #f1f5f9;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                text-align: center;
-                padding: 1rem;
-            }
-            .nav-links {
-                justify-content: center;
-            }
-            .checkout-card {
-                padding: 1.5rem;
-            }
-            .coupon-input {
-                flex-direction: column;
-            }
-        }
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+        body{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;}
+        .navbar{background:rgba(15,25,45,0.95);backdrop-filter:blur(20px);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(0,210,255,0.2);}
+        .logo{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#00d2ff,#a855f7);-webkit-background-clip:text;background-clip:text;color:transparent;}
+        .nav-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
+        .nav-link{text-decoration:none;color:#a0b3d9;font-weight:500;padding:8px 20px;border-radius:40px;transition:all 0.3s;}
+        .nav-link:hover{background:linear-gradient(135deg,#00d2ff,#3a7bd5);color:white;}
+        .btn-logout{background:linear-gradient(135deg,#ff416c,#ff4b2b);color:white;border:none;padding:8px 22px;border-radius:40px;cursor:pointer;font-weight:600;}
+        .main-container{max-width:700px;margin:2rem auto;padding:0 1.5rem;}
+        .checkout-card{background:white;border-radius:32px;padding:2rem;box-shadow:0 20px 35px rgba(0,0,0,0.1);}
+        .checkout-card h2{text-align:center;color:#1a1a2e;margin-bottom:0.5rem;}
+        .checkout-card>p{text-align:center;color:#4a4a6a;margin-bottom:1.5rem;}
+        .order-summary{background:#f8fafc;border-radius:20px;padding:1.5rem;margin-bottom:1.5rem;}
+        .order-summary h3{color:#1a1a2e;margin-bottom:1rem;}
+        .order-detail{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e2e8f0;}
+        .order-detail:last-child{border-bottom:none;}
+        .order-detail span{color:#4a4a6a;}
+        .order-detail strong{color:#1a1a2e;}
+        .price-total{font-size:1.2rem;font-weight:800;color:#00d2ff;}
+        .btn{width:100%;background:linear-gradient(135deg,#00d2ff,#3a7bd5);color:white;border:none;padding:14px;border-radius:40px;font-size:1rem;font-weight:700;cursor:pointer;transition:0.3s;}
+        .btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,210,255,0.3);}
+        .back-link{display:block;text-align:center;margin-top:1rem;color:#00d2ff;text-decoration:none;}
+        @media (max-width:768px){.navbar{flex-direction:column;text-align:center;}}
     </style>
 </head>
 <body>
-    <div class="bg-animation">
-        <div></div><div></div><div></div><div></div><div></div>
-    </div>
-
     <nav class="navbar">
         <div class="logo"><i class="fas fa-bolt"></i> Muzz Shop</div>
         <div class="nav-links">
-            <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
-            <a href="products.html" class="nav-link">🛍️ Products</a>
-            <a href="contact.html" class="nav-link">📞 Contact</a>
-            <button class="btn-logout" onclick="logout()">🚪 Logout</button>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="products.html" class="nav-link">Products</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <button class="btn-logout" onclick="logout()">Logout</button>
         </div>
     </nav>
 
@@ -315,140 +47,60 @@
         <div class="checkout-card">
             <h2><i class="fas fa-shopping-cart"></i> Checkout</h2>
             <p>Review your order before payment</p>
-
-            <div class="coupon-section">
-                <div class="coupon-input">
-                    <input type="text" id="couponCode" placeholder="🎟️ Masukkan kode kupon">
-                    <button onclick="applyCoupon()">Apply</button>
-                </div>
-                <div id="couponMsg" style="font-size: 0.7rem; margin-top: 5px; color: #64748b;"></div>
-            </div>
-
             <div id="checkoutContent"></div>
-
-            <div class="payment-preview">
-                <div class="payment-badge"><i class="fab fa-cc-visa"></i> Visa</div>
-                <div class="payment-badge"><i class="fab fa-cc-mastercard"></i> Mastercard</div>
-                <div class="payment-badge"><i class="fas fa-qrcode"></i> QRIS</div>
-                <div class="payment-badge"><i class="fas fa-mobile-alt"></i> DuitNow</div>
-            </div>
-
-            <button class="btn" onclick="processPayment()">💳 Lanjut ke Pembayaran →</button>
-            <a href="products.html" class="back-link">← Kembali ke Produk</a>
         </div>
     </div>
 
     <script>
-        let appliedDiscount = 0;
-        let couponApplied = false;
-
         function checkAuth() {
-            const user = JSON.parse(localStorage.getItem('currentUser'));
-            if (!user) {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
                 window.location.href = 'login.html';
                 return null;
             }
-            return user;
+            return currentUser;
         }
 
         function logout() {
             localStorage.removeItem('currentUser');
-            localStorage.removeItem('pendingOrder');
             window.location.href = 'index.html';
-        }
-
-        function applyCoupon() {
-            const code = document.getElementById('couponCode').value.trim();
-            const msgDiv = document.getElementById('couponMsg');
-            
-            if (code === 'MUZZ10') {
-                appliedDiscount = 0.1;
-                couponApplied = true;
-                msgDiv.innerHTML = '✅ Kupon MUZZ10 applied! Diskon 10%';
-                msgDiv.style.color = '#22c55e';
-                updatePriceWithDiscount();
-            } else if (code === 'WELCOME') {
-                appliedDiscount = 0.05;
-                couponApplied = true;
-                msgDiv.innerHTML = '✅ Kupon WELCOME applied! Diskon 5%';
-                msgDiv.style.color = '#22c55e';
-                updatePriceWithDiscount();
-            } else if (code === '') {
-                msgDiv.innerHTML = '⚠️ Masukkan kode kupon';
-                msgDiv.style.color = '#eab308';
-            } else {
-                msgDiv.innerHTML = '❌ Kupon tidak valid!';
-                msgDiv.style.color = '#ef4444';
-            }
-        }
-
-        function updatePriceWithDiscount() {
-            const pendingOrder = JSON.parse(localStorage.getItem('pendingOrder'));
-            if (!pendingOrder) return;
-            
-            const originalPrice = pendingOrder.originalPrice || pendingOrder.price;
-            const discountedPrice = Math.floor(originalPrice * (1 - appliedDiscount));
-            
-            pendingOrder.price = discountedPrice;
-            pendingOrder.discount = appliedDiscount;
-            localStorage.setItem('pendingOrder', JSON.stringify(pendingOrder));
-            
-            loadCheckout();
         }
 
         function loadCheckout() {
             const user = checkAuth();
             if (!user) return;
-
+            
             const pendingOrder = JSON.parse(localStorage.getItem('pendingOrder'));
             
             if (!pendingOrder) {
                 window.location.href = 'products.html';
                 return;
             }
-
-            // Simpan original price untuk reference
-            if (!pendingOrder.originalPrice) {
-                pendingOrder.originalPrice = pendingOrder.price;
-                localStorage.setItem('pendingOrder', JSON.stringify(pendingOrder));
-            }
-
-            const displayPrice = pendingOrder.price;
-            const originalPrice = pendingOrder.originalPrice;
-            const hasDiscount = pendingOrder.discount && pendingOrder.discount > 0;
-
-            let discountHtml = '';
-            if (hasDiscount) {
-                discountHtml = `
-                    <div class="order-detail">
-                        <span>💰 Diskon (${pendingOrder.discount * 10}%)</span>
-                        <strong style="color:#22c55e;">-Rp ${(originalPrice - displayPrice).toLocaleString()}</strong>
-                    </div>
-                `;
-            }
-
-            document.getElementById('checkoutContent').innerHTML = `
+            
+            const container = document.getElementById('checkoutContent');
+            container.innerHTML = `
                 <div class="order-summary">
-                    <h3>📋 Detail Pesanan</h3>
-                    <div class="order-detail"><span>🆔 ID Pesanan</span><strong>${pendingOrder.orderId}</strong></div>
-                    <div class="order-detail"><span>📦 Produk</span><strong>${pendingOrder.productName}</strong></div>
-                    <div class="order-detail"><span>💰 Harga Awal</span><strong class="price-total">Rp ${originalPrice.toLocaleString()}</strong></div>
-                    ${discountHtml}
-                    <div class="order-detail"><span>💵 Total Harga</span><strong class="price-total">Rp ${displayPrice.toLocaleString()}</strong></div>
+                    <h3>📋 Order Details</h3>
+                    <div class="order-detail"><span>Order ID</span><strong>${pendingOrder.orderId}</strong></div>
+                    <div class="order-detail"><span>Product</span><strong>${pendingOrder.productName}</strong></div>
+                    <div class="order-detail"><span>Total Price</span><strong class="price-total">Rp ${pendingOrder.price.toLocaleString()}</strong></div>
                 </div>
                 <div class="order-summary">
-                    <h3>👤 Informasi Pembeli</h3>
-                    <div class="order-detail"><span>👤 Nama</span><strong>${pendingOrder.customerName}</strong></div>
-                    <div class="order-detail"><span>📧 Email</span><strong>${pendingOrder.customerEmail}</strong></div>
-                    <div class="order-detail"><span>📱 WhatsApp</span><strong>${pendingOrder.customerPhone || '-'}</strong></div>
+                    <h3>👤 Customer Information</h3>
+                    <div class="order-detail"><span>Name</span><strong>${pendingOrder.customerName}</strong></div>
+                    <div class="order-detail"><span>Email</span><strong>${pendingOrder.customerEmail}</strong></div>
+                    <div class="order-detail"><span>WhatsApp</span><strong>${pendingOrder.customerPhone || '-'}</strong></div>
                 </div>
+                <button class="btn" id="paymentBtn">Proceed to Payment →</button>
+                <a href="products.html" class="back-link">← Back to Products</a>
             `;
+            
+            // Fix: Tambahkan event listener setelah element dibuat
+            document.getElementById('paymentBtn').addEventListener('click', function() {
+                window.location.href = 'payment.html';
+            });
         }
-
-        function processPayment() {
-            window.location.href = 'payment.html';
-        }
-
+        
         loadCheckout();
     </script>
 </body>
